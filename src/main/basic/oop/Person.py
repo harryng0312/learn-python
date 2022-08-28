@@ -8,13 +8,24 @@ class Person:
 
 
 class Student(Person):
+    __family_name: str
+    __last_name: str
+
     def __init__(self, fname: str, lname: str, age: int):
         Person.__init__(self, fname, age)
-        self.fname = fname
-        self.lname = lname
+        self.__family_name = fname
+        self.__last_name = lname
 
     def __str__(self):
-        return self.fname + " " + self.lname + " " + str(self.age)
+        return self.__family_name + " " + self.__last_name + " " + str(self.age)
+
+    @property
+    def last_name(self):
+        return self.__last_name
+
+    @last_name.setter
+    def last_name(self, value):
+        self.__last_name = value
 
 
 p1 = Person("Thử xem", 2)
@@ -22,4 +33,4 @@ print(p1.name)
 print(p1.age)
 
 x = Student("Mike", "Olsen", 2019)
-print(str(x))
+# print(str(x.__last_name))
