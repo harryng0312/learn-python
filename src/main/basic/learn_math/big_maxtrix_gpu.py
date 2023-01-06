@@ -63,17 +63,16 @@ print(f"mat1 {type(mat1)}:\n{mat1}\nmat2 {type(mat2)}:\n{mat2}")
 
 mat1Arr: np.ndarray = np.array(copy=False, dtype=int, object=mat1)
 mat2Arr: np.ndarray = np.array(copy=False, dtype=int, object=mat2)
-# startTime: dt.datetime = dt.datetime.now();
-# matRs = mulMatrix(mat1Arr, mat2Arr)
-# endTime: dt.datetime = dt.datetime.now();
-# print(f"{str(matRs)}")
-# print(f"python time:{(endTime - startTime)}")
-mat1cpArr = cp.array(copy=True, dtype=int, obj=mat1Arr)
-mat2cpArr = cp.array(copy=True, dtype=int, obj=mat2Arr)
+
+# mat1cpArr = cp.array(obj=mat1Arr, dtype=int)
+# mat2cpArr = cp.array(obj=mat2Arr, dtype=int)
+mat1cpArr = cp.asarray(a=mat1Arr, dtype=int)
+mat2cpArr = cp.asarray(a=mat2Arr, dtype=int)
 startTime: dt.datetime = dt.datetime.now();
 # matRs = mat1 * mat2
-matRs = mulMatrix(mat1cpArr, mat2cpArr)
+matRs1 = mulMatrix(mat1cpArr, mat2cpArr)
 endTime: dt.datetime = dt.datetime.now();
+matRs = np.matrix(data=cp.asnumpy(a=matRs1), copy=False)
 
 print(f"Result by GPU:\n{str(matRs)}")
 print(f"Run on GPU time:{(endTime - startTime)}")
