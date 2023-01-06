@@ -1,4 +1,5 @@
 import numpy as np
+import cupy as cp
 import datetime as dt
 import io
 
@@ -6,7 +7,7 @@ FILE_MAT_NAME_1 = "data/matrix/mat1"
 FILE_MAT_NAME_2 = "data/matrix/mat2"
 FILETXT_MAT_NAME_1 = "data/matrix/mat1.txt"
 FILETXT_MAT_NAME_2 = "data/matrix/mat2.txt"
-MAT_SIZE = 1_536
+MAT_SIZE = 2048
 
 def generate_square_maxtrix(n: int) -> np.matrix :
     m1 = np.random.randint(low=-128, high=127, size=(n, n))
@@ -22,7 +23,6 @@ def save_matrix(filepath: str, mat: np.matrix) -> None:
         if file is not None:
             file.close()
 
-
 def load_matrix(filepath: str) -> np.matrix:
     result: np.matrix = None
     file: io.FileIO = None
@@ -34,25 +34,14 @@ def load_matrix(filepath: str) -> np.matrix:
             file.close()
     return result
 
-
 def savetxt_matrix(filepath: str, mat: np.matrix) -> None:
     np.savetxt(fname=filepath, X=mat, fmt="%d")
-
 
 def loadtxt_matrix(filepath: str) -> np.matrix:
     return np.matrix(data=np.loadtxt(fname=filepath, dtype=int), dtype=int)
     
-
-def mulMatrix(mat1: np.ndarray, mat2: np.ndarray) -> np.ndarray:
-    rs: np.ndarray = np.ndarray(shape=(MAT_SIZE, MAT_SIZE))
-    for i in range(0,len(mat1)):
-        temp: int = []
-        for j in range(0,len(mat2[0])):
-            s = 0
-            for k in range(0,len(mat1[0])):
-                s += mat1[i][k]*mat2[k][j]
-            temp.append(s)
-        rs[i] = temp
+def mulMatrix(mat1: cp.ndarray, mat2: cp.ndarray) -> cp.ndarray:
+    rs: cp.ndarray = cp.matmul(mat1, mat2)
     return rs
 
 # mat1 = generate_square_maxtrix(MAT_SIZE)
@@ -79,10 +68,12 @@ mat2Arr: np.ndarray = np.array(copy=False, dtype=int, object=mat2)
 # endTime: dt.datetime = dt.datetime.now();
 # print(f"{str(matRs)}")
 # print(f"python time:{(endTime - startTime)}")
-
+mat1cpArr = cp.array(copy=True, dtype=int, obj=mat1Arr)
+mat2cpArr = cp.array(copy=True, dtype=int, obj=mat2Arr)
 startTime: dt.datetime = dt.datetime.now();
-matRs = mat1 * mat2
+# matRs = mat1 * mat2
+matRs = mulMatrix(mat1cpArr, mat2cpArr)
 endTime: dt.datetime = dt.datetime.now();
 
-print(f"{str(matRs)}")
-print(f"native python time:{(endTime - startTime)}")
+print(f"Result by GPU:\n{str(matRs)}")
+print(f"Run on GPU time:{(endTime - startTime)}")
