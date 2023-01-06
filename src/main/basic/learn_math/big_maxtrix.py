@@ -1,23 +1,50 @@
 import numpy as np
 import datetime as dt
+import io
 
-file1Path = "data/matrix/mat1.txt"
-file2Path = "data/matrix/mat2.txt"
-matSize = 16_384
+FILE_MAT_NAME_1 = "data/matrix/mat1"
+FILE_MAT_NAME_2 = "data/matrix/mat2"
+FILETXT_MAT_NAME_1 = "data/matrix/mat1.txt"
+FILETXT_MAT_NAME_2 = "data/matrix/mat2.txt"
+MAT_SIZE = 1_536
 
 def generate_square_maxtrix(n: int) -> np.matrix :
     m1 = np.random.randint(low=-128, high=127, size=(n, n))
     return m1
 
 def save_matrix(filepath: str, mat: np.matrix) -> None:
-    np.savetxt(fname=filepath, X=mat, fmt="%d")
+    # np.savetxt(fname=filepath, X=mat, fmt="%d")
+    file: io.FileIO = None
+    try:
+        file = open(file=filepath, mode="bw")
+        np.save(file=file, arr=np.array(object=mat, dtype=int))
+    finally:
+        if file is not None:
+            file.close()
+
 
 def load_matrix(filepath: str) -> np.matrix:
-    return np.loadtxt(fname=filepath, dtype=int)
+    result: np.matrix = None
+    file: io.FileIO = None
+    try:
+        file = open(file=filepath, mode="br")
+        result = np.matrix(data=np.load(file=filepath, fix_imports=True), dtype=int)
+    finally:
+        if file is not None:
+            file.close()
+    return result
 
+
+def savetxt_matrix(filepath: str, mat: np.matrix) -> None:
+    np.savetxt(fname=filepath, X=mat, fmt="%d")
+
+
+def loadtxt_matrix(filepath: str) -> np.matrix:
+    return np.matrix(data=np.loadtxt(fname=filepath, dtype=int), dtype=int)
+    
 
 def mulMatrix(mat1: np.ndarray, mat2: np.ndarray) -> np.ndarray:
-    rs: np.ndarray = np.ndarray(shape=(matSize, matSize))
+    rs: np.ndarray = np.ndarray(shape=(MAT_SIZE, MAT_SIZE))
     for i in range(0,len(mat1)):
         temp: int = []
         for j in range(0,len(mat2[0])):
@@ -28,26 +55,30 @@ def mulMatrix(mat1: np.ndarray, mat2: np.ndarray) -> np.ndarray:
         rs[i] = temp
     return rs
 
-# mat1 = generate_square_maxtrix(matSize)
-# save_matrix(file1Path, mat1)
+# mat1 = generate_square_maxtrix(MAT_SIZE)
+# save_matrix(filepath=FILE_MAT_NAME_1, mat=mat1)
+# savetxt_matrix(filepath=FILETXT_MAT_NAME_1, mat=mat1)
 
-# mat2 = generate_square_maxtrix(matSize)
-# save_matrix(file2Path, mat2)
+# mat2 = generate_square_maxtrix(MAT_SIZE)
+# save_matrix(filepath=FILE_MAT_NAME_2, mat=mat2)
+# savetxt_matrix(filepath=FILETXT_MAT_NAME_2, mat=mat2)
 
 startLoadTime = dt.datetime = dt.datetime.now();
-mat1 = load_matrix(file1Path)
-mat2 = load_matrix(file2Path)
+# mat1 = load_matrix(FILE_MAT_NAME_1)
+# mat2 = load_matrix(FILE_MAT_NAME_2)
+mat1 = loadtxt_matrix(FILETXT_MAT_NAME_1)
+mat2 = loadtxt_matrix(FILETXT_MAT_NAME_2)
 endLoadTime = dt.datetime = dt.datetime.now();
 print(f"Load done in {endLoadTime - startLoadTime}...")
+print(f"mat1 {type(mat1)}:\n{mat1}\nmat2 {type(mat2)}:\n{mat2}")
 
 mat1Arr: np.ndarray = np.array(copy=False, dtype=int, object=mat1)
 mat2Arr: np.ndarray = np.array(copy=False, dtype=int, object=mat2)
-# print(f"{type(np.array(copy=False, dtype=int, object=mat1))}")
-startTime: dt.datetime = dt.datetime.now();
+# startTime: dt.datetime = dt.datetime.now();
 # matRs = mulMatrix(mat1Arr, mat2Arr)
-endTime: dt.datetime = dt.datetime.now();
+# endTime: dt.datetime = dt.datetime.now();
 # print(f"{str(matRs)}")
-print(f"python time:{(endTime - startTime)}")
+# print(f"python time:{(endTime - startTime)}")
 
 startTime: dt.datetime = dt.datetime.now();
 matRs = mat1 * mat2
