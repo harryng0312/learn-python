@@ -6,7 +6,7 @@ FILE_MAT_NAME_1 = "data/matrix/mat1"
 FILE_MAT_NAME_2 = "data/matrix/mat2"
 FILETXT_MAT_NAME_1 = "data/matrix/mat1.txt"
 FILETXT_MAT_NAME_2 = "data/matrix/mat2.txt"
-MAT_SIZE = 1_536
+MAT_SIZE = 2048
 
 def generate_square_maxtrix(n: int) -> np.matrix :
     m1 = np.random.randint(low=-128, high=127, size=(n, n))
@@ -44,21 +44,19 @@ def loadtxt_matrix(filepath: str) -> np.matrix:
     
 
 def mulMatrix(mat1: np.ndarray, mat2: np.ndarray) -> np.ndarray:
-    rs: np.ndarray = np.ndarray(shape=(MAT_SIZE, MAT_SIZE))
-    for i in range(0,len(mat1)):
-        temp: int = []
-        for j in range(0,len(mat2[0])):
+    rs: np.ndarray = np.ndarray(shape=(mat1.shape[0], mat2.shape[1]), dtype=int)
+    for i in range(0, len(mat1)):
+        for j in range(0, len(mat2[0])):
             s = 0
-            for k in range(0,len(mat1[0])):
+            for k in range(0, len(mat1[0])):
                 s += mat1[i][k]*mat2[k][j]
-            temp.append(s)
-        rs[i] = temp
+            rs[i, j] = s
     return rs
 
 # mat1 = generate_square_maxtrix(MAT_SIZE)
 # save_matrix(filepath=FILE_MAT_NAME_1, mat=mat1)
 # savetxt_matrix(filepath=FILETXT_MAT_NAME_1, mat=mat1)
-
+#
 # mat2 = generate_square_maxtrix(MAT_SIZE)
 # save_matrix(filepath=FILE_MAT_NAME_2, mat=mat2)
 # savetxt_matrix(filepath=FILETXT_MAT_NAME_2, mat=mat2)
@@ -81,7 +79,8 @@ mat2Arr: np.ndarray = np.array(copy=False, dtype=int, object=mat2)
 # print(f"python time:{(endTime - startTime)}")
 
 startTime: dt.datetime = dt.datetime.now();
-matRs = mat1 * mat2
+# matRs = mat1 * mat2
+matRs = mulMatrix(mat1Arr, mat2Arr)
 endTime: dt.datetime = dt.datetime.now();
 
 print(f"Result by CPU:\n{str(matRs)}")
