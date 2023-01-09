@@ -52,12 +52,12 @@ def mulMatrix(mat1: cp.ndarray, mat2: cp.ndarray) -> cp.ndarray:
 # save_matrix(filepath=FILE_MAT_NAME_2, mat=mat2)
 # savetxt_matrix(filepath=FILETXT_MAT_NAME_2, mat=mat2)
 
-startLoadTime = dt.datetime = dt.datetime.now();
+startLoadTime = dt.datetime = dt.datetime.now()
 # mat1 = load_matrix(FILE_MAT_NAME_1)
 # mat2 = load_matrix(FILE_MAT_NAME_2)
 mat1 = loadtxt_matrix(FILETXT_MAT_NAME_1)
 mat2 = loadtxt_matrix(FILETXT_MAT_NAME_2)
-endLoadTime = dt.datetime = dt.datetime.now();
+endLoadTime = dt.datetime = dt.datetime.now()
 print(f"Load done in {endLoadTime - startLoadTime}...")
 print(f"mat1 {type(mat1)}:\n{mat1}\nmat2 {type(mat2)}:\n{mat2}")
 
@@ -74,5 +74,5 @@ matRs1 = mulMatrix(mat1cpArr, mat2cpArr)
 endTime: dt.datetime = dt.datetime.now();
 matRs = np.matrix(data=cp.asnumpy(a=matRs1), copy=False)
 
-print(f"Result by GPU:\n{str(matRs)}")
-print(f"Run on GPU time:{(endTime - startTime)}")
+print(f"Result by CUDA GPU:\n{str(matRs)}")
+print(f"Run on CUDA GPU time:{(endTime - startTime)}")
