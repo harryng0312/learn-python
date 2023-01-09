@@ -78,7 +78,7 @@ def initCl() -> None:
 def mulMatrix(mat1: np.ndarray, mat2: np.ndarray, mat1Buff: cl.Buffer, mat2Buff: cl.Buffer,
               resultBuff: cl.Buffer, mat1WBuff: cl.Buffer, mat2WBuff: cl.Buffer) -> None:
     # rs: np.ndarray = mat1 * mat2
-    PROGRAM.matrixMul(CMD_QUEUE, (mat1.shape[0], mat2.shape[1]), LOCAL_WORKGROUP, mat1Buff, mat2Buff, resultBuff, mat1WBuff, mat2WBuff)
+    PROGRAM.matrixMulInt(CMD_QUEUE, (mat1.shape[0], mat2.shape[1]), LOCAL_WORKGROUP, mat1Buff, mat2Buff, resultBuff, mat1WBuff, mat2WBuff)
     CMD_QUEUE.finish()
 
 
@@ -110,13 +110,13 @@ mat2Buff = cl.Buffer(context=CONTEXT, flags=(cl.mem_flags.READ_ONLY | cl.mem_fla
 mat1WBuff = cl.Buffer(context=CONTEXT, flags=(cl.mem_flags.READ_ONLY | cl.mem_flags.COPY_HOST_PTR), hostbuf=np.int32(mat1Arr.shape[1]))
 mat2WBuff = cl.Buffer(context=CONTEXT, flags=(cl.mem_flags.READ_ONLY | cl.mem_flags.COPY_HOST_PTR), hostbuf=np.int32(mat2Arr.shape[1]))
 # resulting buffer
-resultBuff = cl.Buffer(context=CONTEXT, flags=(cl.mem_flags.READ_WRITE), size=mat2Arr.nbytes)
+resultBuff = cl.Buffer(context=CONTEXT, flags=(cl.mem_flags.READ_WRITE), size=mat3Arr.nbytes)
 
 startTime: dt.datetime = dt.datetime.now()
 mulMatrix(mat1Arr, mat2Arr, mat1Buff, mat2Buff, resultBuff, mat1WBuff, mat2WBuff)
 endTime: dt.datetime = dt.datetime.now()
 
-mat3Arr = np.empty_like(mat3Arr)
+# mat3Arr = np.empty_like(mat3Arr)
 cl.enqueue_copy(queue=CMD_QUEUE, dest=mat3Arr, src=resultBuff)
 matRs = np.matrix(data=mat3Arr, copy=False)
 

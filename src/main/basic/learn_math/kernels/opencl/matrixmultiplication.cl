@@ -25,3 +25,13 @@ __kernel void matrixMul(__global float *mat1, __global float *mat2,__global floa
     }
     mat3[posy*(*wB)+posx] = value;
 }
+
+__kernel void matrixMulInt(__global int *mat1, __global int *mat2,__global int *mat3,__global int *wA, __global int *wB){
+    int posx = get_global_id(0);
+    int posy = get_global_id(1);
+    float value = 0;
+    for(int i =0 ; i < *wA;++i){
+        value+= mat1[posy*(*wA)+i]*mat2[i*(*wB)+posx];
+    }
+    mat3[posy*(*wB)+posx] = value;
+}
