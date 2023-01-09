@@ -1,5 +1,6 @@
 import numpy as np
 import cupy as cp
+import cupyx as cpx
 import datetime as dt
 import io
 
@@ -64,6 +65,8 @@ print(f"mat1 {type(mat1)}:\n{mat1}\nmat2 {type(mat2)}:\n{mat2}")
 mat1Arr: np.ndarray = np.array(copy=False, dtype=int, object=mat1)
 mat2Arr: np.ndarray = np.array(copy=False, dtype=int, object=mat2)
 
+
+print(f"runtime info: {cpx.get_runtime_info()}")
 # mat1cpArr = cp.array(obj=mat1Arr, dtype=int)
 # mat2cpArr = cp.array(obj=mat2Arr, dtype=int)
 mat1cpArr = cp.asarray(a=mat1Arr, dtype=int)

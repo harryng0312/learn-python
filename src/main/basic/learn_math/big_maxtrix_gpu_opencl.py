@@ -11,6 +11,7 @@ FILETXT_MAT_NAME_1 = "data/matrix/mat1.txt"
 FILETXT_MAT_NAME_2 = "data/matrix/mat2.txt"
 MAT_SIZE = 2048
 
+LOCAL_WORKGROUP_SIZE = 32
 LOCAL_WORKGROUP: tuple
 CONTEXT: cl.Context = None
 PROGRAM: cl.Program = None
@@ -59,7 +60,8 @@ def initCl() -> None:
     global CONTEXT
     global CMD_QUEUE
     global PROGRAM
-    LOCAL_WORKGROUP = (16, 16)
+    # block, thread
+    LOCAL_WORKGROUP = (LOCAL_WORKGROUP_SIZE, LOCAL_WORKGROUP_SIZE)
     # mf = cl.mem_flags
     # gets platform list and takes first
     platforms = cl.get_platforms()
