@@ -26,7 +26,7 @@ def calculateMulAndSum(rs: np.ndarray, m1: np.ndarray, m2: np.ndarray, row_no: i
     # print(f"Rs id:{id(rs)}\n{rs}")
 
 def mulMatrixParallel(mat1: np.ndarray, mat2: np.ndarray, threadCount: int = 4) -> np.ndarray:
-    context = get_context('fork') # spawn
+    context = get_context('fork') # spawn, fork, forkserver
     with ProcessPoolExecutor(max_workers=threadCount, mp_context=context) as executor:
         rs: np.ndarray = np.ndarray(shape=(mat1.shape[0], mat2.shape[1]), dtype=int)
         # queue = context.Queue(mat1.shape[0] * mat2.shape[1])
@@ -54,9 +54,10 @@ def print_matrix():
         [1, 100],
         [0, 10]
     ])
-    # rs = m1 * m2
-    rs = mulMatrixParallel(mat1=np.array(copy=False, dtype=int, object=m1),
-                   mat2=np.array(copy=False, dtype=int, object=m2))
+    rs = m1 * m2
+    # rs = mulMatrixParallel(mat1=np.array(copy=False, dtype=int, object=m1),
+    #                mat2=np.array(copy=False, dtype=int, object=m2))
+    # rs = np.matrix(rs)
     print(f"Kết quả: \n{rs}")
     print(f"Dạng ma trận: {rs.shape}")
     print(f"Kiểu dữ liệu: {rs.dtype}")
