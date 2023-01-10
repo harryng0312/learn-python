@@ -10,9 +10,11 @@ FILETXT_MAT_NAME_1 = "data/matrix/mat1.txt"
 FILETXT_MAT_NAME_2 = "data/matrix/mat2.txt"
 MAT_SIZE = 2048
 
-def generate_square_maxtrix(n: int) -> np.matrix :
+
+def generate_square_maxtrix(n: int) -> np.matrix:
     m1 = np.random.randint(low=-128, high=127, size=(n, n))
     return m1
+
 
 def save_matrix(filepath: str, mat: np.matrix) -> None:
     # np.savetxt(fname=filepath, X=mat, fmt="%d")
@@ -23,6 +25,7 @@ def save_matrix(filepath: str, mat: np.matrix) -> None:
     finally:
         if file is not None:
             file.close()
+
 
 def load_matrix(filepath: str) -> np.matrix:
     result: np.matrix = None
@@ -35,15 +38,19 @@ def load_matrix(filepath: str) -> np.matrix:
             file.close()
     return result
 
+
 def savetxt_matrix(filepath: str, mat: np.matrix) -> None:
     np.savetxt(fname=filepath, X=mat, fmt="%d")
 
+
 def loadtxt_matrix(filepath: str) -> np.matrix:
     return np.matrix(data=np.loadtxt(fname=filepath, dtype=int), dtype=int)
-    
+
+
 def mulMatrix(mat1: cp.ndarray, mat2: cp.ndarray) -> cp.ndarray:
     rs: cp.ndarray = cp.matmul(mat1, mat2)
     return rs
+
 
 # mat1 = generate_square_maxtrix(MAT_SIZE)
 # save_matrix(filepath=FILE_MAT_NAME_1, mat=mat1)
@@ -64,7 +71,6 @@ print(f"mat1 {type(mat1)}:\n{mat1}\nmat2 {type(mat2)}:\n{mat2}")
 
 mat1Arr: np.ndarray = np.array(copy=False, dtype=int, object=mat1)
 mat2Arr: np.ndarray = np.array(copy=False, dtype=int, object=mat2)
-
 
 print(f"runtime info: {cpx.get_runtime_info()}")
 # mat1cpArr = cp.array(obj=mat1Arr, dtype=int)

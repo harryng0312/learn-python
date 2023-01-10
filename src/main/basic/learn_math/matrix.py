@@ -21,4 +21,5 @@ def print_matrix():
     print(f"Số lượng phần tử: {rs.size}")
     print(f"Kích thước mỗi phần tử (bytes): {rs.itemsize}")
 
+
 print_matrix()

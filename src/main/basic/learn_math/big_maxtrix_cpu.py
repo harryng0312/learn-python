@@ -8,9 +8,11 @@ FILETXT_MAT_NAME_1 = "data/matrix/mat1.txt"
 FILETXT_MAT_NAME_2 = "data/matrix/mat2.txt"
 MAT_SIZE = 1_536
 
-def generate_square_maxtrix(n: int) -> np.matrix :
+
+def generate_square_maxtrix(n: int) -> np.matrix:
     m1 = np.random.randint(low=-128, high=127, size=(n, n))
     return m1
+
 
 def save_matrix(filepath: str, mat: np.matrix) -> None:
     # np.savetxt(fname=filepath, X=mat, fmt="%d")
@@ -41,19 +43,20 @@ def savetxt_matrix(filepath: str, mat: np.matrix) -> None:
 
 def loadtxt_matrix(filepath: str) -> np.matrix:
     return np.matrix(data=np.loadtxt(fname=filepath, dtype=int), dtype=int)
-    
+
 
 def mulMatrix(mat1: np.ndarray, mat2: np.ndarray) -> np.ndarray:
     rs: np.ndarray = np.ndarray(shape=(MAT_SIZE, MAT_SIZE))
-    for i in range(0,len(mat1)):
+    for i in range(0, len(mat1)):
         temp: int = []
-        for j in range(0,len(mat2[0])):
+        for j in range(0, len(mat2[0])):
             s = 0
-            for k in range(0,len(mat1[0])):
-                s += mat1[i][k]*mat2[k][j]
+            for k in range(0, len(mat1[0])):
+                s += mat1[i][k] * mat2[k][j]
             temp.append(s)
         rs[i] = temp
     return rs
+
 
 # mat1 = generate_square_maxtrix(MAT_SIZE)
 # save_matrix(filepath=FILE_MAT_NAME_1, mat=mat1)
