@@ -1,8 +1,8 @@
 # This is a sample Python script.
 import sys
 
-import numpy as np
-from learn_math import matrix as mt
+# import numpy as np
+# from learn_math import matrix as mt
 # Press Shift+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 
@@ -10,8 +10,8 @@ from learn_math import matrix as mt
 def print_hi(name):
     # Use a breakpoint in the code line below to debug your script.
     print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-    mt.print_matrix()
-    print(f"Kích thước số: {sys.getsizeof(np.int8(6.0))}")
+    # mt.print_matrix()
+    # print(f"Kích thước số: {sys.getsizeof(np.int8(6.0))}")
 
 
 # Press the green button in the gutter to run the script.
