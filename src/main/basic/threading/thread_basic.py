@@ -1,9 +1,9 @@
 # import thread
 import datetime
-# import os
-# import sys
-# current = os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
-# sys.path.append(current)
+import os
+import sys
+current = os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
+sys.path.append(current)
 from util import logger_conf as log
 
 
