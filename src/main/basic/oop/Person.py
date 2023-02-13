@@ -28,9 +28,11 @@ class Student(Person):
         self.__last_name = value
 
 
-p1 = Person("Thử xem", 2)
-print(p1.name)
-print(p1.age)
+# p1 = Person("Thử xem", 2)
+# print(p1.name)
+# print(p1.age)
 
-x = Student("Mike", "Olsen", 2019)
+# x = Student("Mike", "Olsen", 2019)
 # print(str(x.__last_name))
+
+
