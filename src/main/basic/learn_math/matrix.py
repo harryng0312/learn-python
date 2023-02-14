@@ -54,9 +54,9 @@ def print_matrix():
         [1, 100],
         [0, 10]
     ])
-    rs = m1 * m2
-    # rs = mulMatrixParallel(mat1=np.array(copy=False, dtype=int, object=m1),
-    #                mat2=np.array(copy=False, dtype=int, object=m2))
+    # rs = m1 * m2
+    rs = mul_matrix_parallel(mat1=np.array(copy=False, dtype=int, object=m1),
+                   mat2=np.array(copy=False, dtype=int, object=m2))
     # rs = np.matrix(rs)
     print(f"Kết quả: \n{rs}")
     print(f"Dạng ma trận: {rs.shape}")
