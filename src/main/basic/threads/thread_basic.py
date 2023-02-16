@@ -17,9 +17,9 @@ def thread_function(param: list[str]) -> None:
     logger.info(f"out to thread function{param} at {datetime.datetime.now()}")
     pass
 
-def thread_function_2(param: int) -> None:
+def thread_function_2(param1: int, param2: int) -> None:
     global TOTAL
-    TOTAL += param
+    TOTAL += param1 * param2
     time.sleep(0.5)
     pass
 
@@ -36,7 +36,7 @@ def multi_thread() -> None:
     threads: list[Thread] = []
     global TOTAL
     for i in range(0, count):
-        tmp: Thread = Thread(target = thread_function_2, args=(1,))
+        tmp: Thread = Thread(target = thread_function_2, args=(1,2))
         threads.append(tmp)
         pass
     # thread_function_2(1)
