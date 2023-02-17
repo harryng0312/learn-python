@@ -2,7 +2,7 @@ from io import FileIO
 # import os
 # import sys
 # sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../', '../')))
-from learn_python.util.logger_conf import logger
+from module.util.logger_conf import logger
 
 # from src.main.util.logger_conf import logger
 
