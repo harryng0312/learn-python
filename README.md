@@ -10,3 +10,18 @@ $ conda install -c conda-forge cupy cudatoolkit=11.8
 ```shell
 $ conda install -c conda-forge pyopencl
 ```
+
+# setup:
+```shell
+$ python setup.py install
+```
+
+# remove:
+```shell
+$ pip remove learn_python
+```
+
+# clean:
+```shell
+$ python setup.py clean -a
+```
