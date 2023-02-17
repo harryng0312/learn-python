@@ -1,7 +1,7 @@
 import logging
 import sys
 
-LOG_FILE = "data/log/app.log"
+LOG_FILE = "../../../data/log/app.log"
 
 # logging.basicConfig(filename=LOG_FILE,
 #                     filemode='a',
