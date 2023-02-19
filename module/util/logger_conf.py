@@ -1,7 +1,10 @@
 import logging
 import sys
 
-LOG_FILE = "../../../data/log/app.log"
+from module import ROOT_DIR
+
+# LOG_FILE = "../../../data/log/app.log"
+LOG_FILE = ROOT_DIR + "/../data/log/app.log"
 
 # logging.basicConfig(filename=LOG_FILE,
 #                     filemode='a',
