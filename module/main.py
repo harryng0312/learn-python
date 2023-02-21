@@ -2,7 +2,7 @@
 import sys
 from basic.threads import thread_basic as tb
 import numpy as np
-# from basic.learn_math import matrix as mt
+# from learn_math import matrix as mt
 # Press Shift+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 
