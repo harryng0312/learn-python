@@ -1,7 +1,7 @@
 import datetime
 import random
 
-SIZE = 1_000_000
+SIZE = 500_000
 FILE_NAME = f"./collection_{SIZE}.txt"
 
 
@@ -10,7 +10,9 @@ def gen_data():
     cB = random.sample(range(-SIZE * 10, SIZE * 10), SIZE)
     intersect: list[int] = list()
     tmpMap: dict = dict()
-    print(f"start: {datetime.datetime.now()}")
+    finTime: datetime
+    startTime: datetime = datetime.datetime.now()
+    print(f"start: {startTime}")
     for i in cA:
         tmpMap[i] = 0
         pass
@@ -19,7 +21,9 @@ def gen_data():
             intersect.append(i)
             pass
         pass
-    print(f"fin: {datetime.datetime.now()}")
+    finTime = datetime.datetime.now()
+    print(f"fin: {finTime}")
+    print(f"duration: {(finTime - startTime).microseconds}")
     # print(f"intersect:{intersect}")
     total: int = 0
     for i in intersect: total += i
@@ -57,7 +61,8 @@ def find_intersect1():
     intersect: list[int] = list()
     mapTmp = set()
     cTotalVal = 0
-    print(f"start: {datetime.datetime.now()}")
+    startTime: datetime = datetime.datetime.now()
+    print(f"start: {startTime}")
     for i in cA:
         mapTmp.add(i)
         pass
@@ -67,7 +72,9 @@ def find_intersect1():
             cTotalVal += i
             pass
         pass
-    print(f"fin: {datetime.datetime.now()}")
+    finTime = datetime.datetime.now()
+    print(f"fin: {finTime}")
+    print(f"duration: {(finTime - startTime).microseconds / 1000.0}")
     print(f"{len(intersect)} {cTotalVal}")
     pass
 
@@ -92,7 +99,8 @@ def find_intersect2():
 
     intersect: list[int] = list()
     cTotal = []
-    print(f"start: {datetime.datetime.now()}")
+    startTime: datetime = datetime.datetime.now()
+    print(f"start: {startTime}")
     for i in cA:
         cTotal.append(i)
         pass
@@ -108,10 +116,52 @@ def find_intersect2():
             cTotalVal += cTotal[i]
             pass
         pass
-    print(f"fin: {datetime.datetime.now()}")
+    finTime = datetime.datetime.now()
+    print(f"fin: {finTime}")
+    print(f"duration: {(finTime - startTime).microseconds / 1000.0}")
+    print(f"{len(intersect)} {cTotalVal}")
+    pass
+
+
+def find_intersect3():
+    cA = []
+    cB = []
+    with open(file=FILE_NAME, mode="rt") as f:
+        strCA = f.readline()
+        arrCA = strCA.split(sep=" ")
+        for i in arrCA:
+            if i.strip() != "":
+                cA.append(int(i.strip()))
+            pass
+        strCB = f.readline()
+        arrCB = strCB.split(sep=" ")
+        for i in arrCB:
+            if i.strip() != "":
+                cB.append(int(i.strip()))
+            pass
+        pass
+
+    intersect: list[int] = list()
+    cTotalVal = 0
+
+    startTime: datetime = datetime.datetime.now()
+    print(f"start: {startTime}")
+    for i in cA:
+        for j in cB:
+            if i == j:
+                intersect.append(i)
+                cTotalVal += i
+            pass
+    finTime = datetime.datetime.now()
+    print(f"fin: {finTime}")
+    print(f"duration: {(finTime - startTime).microseconds / 1000.0}")
     print(f"{len(intersect)} {cTotalVal}")
     pass
 
 
 # gen_data()
 find_intersect1()
+print(f"======")
+find_intersect2()
+print(f"======")
+find_intersect3()
