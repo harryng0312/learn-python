@@ -39,12 +39,15 @@ def find_intersect1():
     mapTmp = set()
     intersect = []
     cTotalVal = 0
+    # startTimeIn = datetime.datetime.now()
     with open(file=FILE_NAME, mode="rt") as f:
         strCA = f.readline()
         cA = [int(num.strip()) for num in strCA.split(" ") if num.strip() != ""]
         strCB = f.readline()
         cB = [int(num.strip()) for num in strCB.split(" ") if num.strip() != ""]
         pass
+    # finTimeIn = datetime.datetime.now()
+    # print(f"duration internal: {(finTimeIn - startTimeIn).total_second()}")
     for i in cA:
         mapTmp.add(i)
         pass
@@ -62,12 +65,17 @@ def find_intersect2():
     cA = None
     cB = None
     cTotal = []
+    # startTimeIn = datetime.datetime.now()
+    # print(f"start internal: {startTimeIn}")
     with open(file=FILE_NAME, mode="rt") as f:
         strCA = f.readline()
         cA = [int(num.strip()) for num in strCA.split(" ") if num.strip() != ""]
         strCB = f.readline()
         cB = [int(num.strip()) for num in strCB.split(" ") if num.strip() != ""]
         pass
+    # finTimeIn = datetime.datetime.now()
+    # print(f"fin internal: {finTimeIn}")
+    # print(f"duration internal: {(finTimeIn - startTimeIn).total_seconds()}")
     intersect: list[int] = list()
     for i in cA: cTotal.append(i)
     for i in cB: cTotal.append(i)
@@ -106,20 +114,20 @@ def find_intersect3():
 
 
 # gen_data()
-startTime = datetime.datetime.now()
-print(f"start: {startTime}")
+startTime1 = datetime.datetime.now()
+print(f"start: {startTime1}")
 find_intersect1()
-finTime = datetime.datetime.now()
-print(f"fin: {finTime}")
-print(f"duration: {(finTime - startTime).microseconds / 1000.0}")
+finTime1 = datetime.datetime.now()
+print(f"fin: {finTime1}")
+print(f"duration: {(finTime1 - startTime1).total_seconds()}")
 
 print(f"======")
-startTime = datetime.datetime.now()
-print(f"start: {startTime}")
+startTime2 = datetime.datetime.now()
+print(f"start: {startTime2}")
 find_intersect2()
-finTime = datetime.datetime.now()
-print(f"fin: {finTime}")
-print(f"duration: {(finTime - startTime).microseconds / 1000.0}")
+finTime2 = datetime.datetime.now()
+print(f"fin: {finTime2}")
+print(f"duration: {(finTime2 - startTime2).total_seconds()}")
 
 # print(f"======")
 # startTime = datetime.datetime.now()
