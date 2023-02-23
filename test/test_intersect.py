@@ -41,10 +41,10 @@ def find_intersect1():
     cTotalVal = 0
     # startTimeIn = datetime.datetime.now()
     with open(file=FILE_NAME, mode="rt") as f:
-        strCA = f.readline()
-        cA = [int(num.strip()) for num in strCA.split(" ") if num.strip() != ""]
-        strCB = f.readline()
-        cB = [int(num.strip()) for num in strCB.split(" ") if num.strip() != ""]
+        strCA = f.readline().split(" ")
+        cA = [int(num.strip()) for num in strCA if num.strip() != ""]
+        strCB = f.readline().split(" ")
+        cB = [int(num.strip()) for num in strCB if num.strip() != ""]
         pass
     # finTimeIn = datetime.datetime.now()
     # print(f"duration internal: {(finTimeIn - startTimeIn).total_second()}")
@@ -68,10 +68,10 @@ def find_intersect2():
     # startTimeIn = datetime.datetime.now()
     # print(f"start internal: {startTimeIn}")
     with open(file=FILE_NAME, mode="rt") as f:
-        strCA = f.readline()
-        cA = [int(num.strip()) for num in strCA.split(" ") if num.strip() != ""]
-        strCB = f.readline()
-        cB = [int(num.strip()) for num in strCB.split(" ") if num.strip() != ""]
+        strCA = f.readline().split(" ")
+        cA = [int(num.strip()) for num in strCA if num.strip() != ""]
+        strCB = f.readline().split(" ")
+        cB = [int(num.strip()) for num in strCB if num.strip() != ""]
         pass
     # finTimeIn = datetime.datetime.now()
     # print(f"fin internal: {finTimeIn}")
@@ -96,12 +96,12 @@ def find_intersect3():
     cA = None
     cB = None
     with open(file=FILE_NAME, mode="rt") as f:
-        strCA = f.readline()
-        cA = [int(num) for num in strCA.split(" ") if num.strip() != ""]
-        strCB = f.readline()
-        cB = [int(num) for num in strCB.split(" ") if num.strip() != ""]
+        strCA = f.readline().split(" ")
+        cA = [int(num) for num in strCA if num.strip() != ""]
+        strCB = f.readline().split(" ")
+        cB = [int(num) for num in strCB if num.strip() != ""]
         pass
-    intersect: list[int] = list()
+    intersect = []
     cTotalVal = 0
     for i in cA:
         for j in cB:
