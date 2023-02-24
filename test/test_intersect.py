@@ -1,8 +1,10 @@
 import datetime
 import random
 
-SIZE = 1_000_000
-FILE_NAME = f"./collection_{SIZE}.txt"
+from module import ROOT_DIR
+
+SIZE = 500_000
+FILE_NAME = ROOT_DIR + f"/../data/test/intersect/collection_{SIZE}.txt"
 
 
 def gen_data():
