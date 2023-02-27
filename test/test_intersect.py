@@ -1,6 +1,5 @@
 import datetime
 import random
-import threading
 from concurrent.futures import ThreadPoolExecutor
 
 from module import ROOT_DIR
