@@ -1,9 +1,10 @@
 import datetime
 import random
+from concurrent.futures import ThreadPoolExecutor
 
 from module import ROOT_DIR
 
-SIZE = 500_000
+SIZE = 10_000
 FILE_NAME = ROOT_DIR + f"/../data/test/intersect/collection_{SIZE}.txt"
 
 
@@ -35,7 +36,7 @@ def gen_data():
     pass
 
 
-def find_intersect1():
+def find_intersect_hashset():
     cA = None
     cB = None
     mapTmp = set()
@@ -63,7 +64,7 @@ def find_intersect1():
     pass
 
 
-def find_intersect2():
+def find_intersect_mergeandsort():
     cA = None
     cB = None
     cTotal = []
@@ -94,7 +95,7 @@ def find_intersect2():
     pass
 
 
-def find_intersect3():
+def find_intersect_tradition():
     cA = None
     cB = None
     with open(file=FILE_NAME, mode="rt") as f:
@@ -115,10 +116,48 @@ def find_intersect3():
     pass
 
 
+def compare_value_in_range(val: int, arr: []) -> ([], int):
+    tmpIntersect = []
+    cTotalValTmp = 0
+    for v in arr:
+        if val == v:
+            tmpIntersect.append(val)
+            cTotalValTmp += val
+        pass
+    # print(f"size {len(tmpIntersect)}")
+    return tmpIntersect, cTotalValTmp
+
+
+def find_intersect_tradition_parallel():
+    cA = None
+    cB = None
+    with open(file=FILE_NAME, mode="rt") as f:
+        strCA = f.readline().split(" ")
+        cA = [int(num) for num in strCA if num.strip() != ""]
+        strCB = f.readline().split(" ")
+        cB = [int(num) for num in strCB if num.strip() != ""]
+        pass
+    intersect = []
+    cTotalVal = 0
+    # lenA = len(cA)
+    # lenB = len(cB)
+    # lenAB = lenA * lenB
+    with ThreadPoolExecutor(max_workers=4) as executor:
+        for vA in cA:
+            for interTmp, tmpTotalVal in executor.map(compare_value_in_range, [vA], [cB]):
+                intersect.append(interTmp)
+                cTotalVal += tmpTotalVal
+                pass
+        pass
+
+    print(f"{len(intersect)} {cTotalVal}")
+    pass
+
+
 # gen_data()
 startTime1 = datetime.datetime.now()
 print(f"start: {startTime1}")
-find_intersect1()
+find_intersect_hashset()
 finTime1 = datetime.datetime.now()
 print(f"fin: {finTime1}")
 print(f"duration: {(finTime1 - startTime1).total_seconds()}")
@@ -126,15 +165,23 @@ print(f"duration: {(finTime1 - startTime1).total_seconds()}")
 print(f"======")
 startTime2 = datetime.datetime.now()
 print(f"start: {startTime2}")
-find_intersect2()
+find_intersect_mergeandsort()
 finTime2 = datetime.datetime.now()
 print(f"fin: {finTime2}")
 print(f"duration: {(finTime2 - startTime2).total_seconds()}")
 
-# print(f"======")
-# startTime = datetime.datetime.now()
-# print(f"start: {startTime}")
-# find_intersect3()
-# finTime = datetime.datetime.now()
-# print(f"fin: {finTime}")
-# print(f"duration: {(finTime - startTime).microseconds / 1000.0}")
+print(f"======")
+startTime = datetime.datetime.now()
+print(f"start: {startTime}")
+find_intersect_tradition()
+finTime = datetime.datetime.now()
+print(f"fin: {finTime}")
+print(f"duration: {(finTime - startTime).total_seconds()}")
+
+print(f"======")
+startTime = datetime.datetime.now()
+print(f"start: {startTime}")
+find_intersect_tradition_parallel()
+finTime = datetime.datetime.now()
+print(f"fin: {finTime}")
+print(f"duration: {(finTime - startTime).total_seconds()}")
