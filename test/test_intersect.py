@@ -1,5 +1,6 @@
 import datetime
 import random
+import time
 from concurrent.futures import ThreadPoolExecutor
 
 from module import ROOT_DIR
@@ -111,13 +112,14 @@ def find_intersect_tradition():
             if i == j:
                 intersect.append(i)
                 cTotalVal += i
+                time.sleep(0.001)
                 break
             pass
     print(f"{len(intersect)} {cTotalVal}")
     pass
 
 
-def compare_value_in_range(val: int, arr: [int]) -> ([], int):
+def compare_value_in_range(val: int, arr: list[int]) -> tuple[list[int], int]:
     tmpIntersect = []
     cTotalValTmp = 0
     for v in arr:
@@ -128,12 +130,13 @@ def compare_value_in_range(val: int, arr: [int]) -> ([], int):
             cTotalValTmp += val
             break
         pass
+    time.sleep(0.001)
     return tmpIntersect, cTotalValTmp
 
 
 def find_intersect_tradition_parallel():
-    cA: [int] = None
-    cB: [int] = None
+    cA: list[int] = None
+    cB: list[int] = None
     with open(file=FILE_NAME, mode="rt") as f:
         strCA = f.readline().split(" ")
         cA = [int(num) for num in strCA if num.strip() != ""]
@@ -155,8 +158,8 @@ def find_intersect_tradition_parallel():
 
 
 def find_intersect_tradition_parallel_queue():
-    cA: [int] = None
-    cB: [int] = None
+    cA: list[int] = None
+    cB: list[int] = None
     with open(file=FILE_NAME, mode="rt") as f:
         strCA = f.readline().split(" ")
         cA = [int(num) for num in strCA if num.strip() != ""]
