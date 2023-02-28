@@ -1,6 +1,7 @@
 import pickle
 import os
 from Person import *
+from module.util.logger_conf import logger
 
 PERSON_FILE_PATH = "data/person/student.dat"
 
@@ -21,7 +22,7 @@ def read_from_bin_file():
         xData: bytes = destFile.read(endPos)
         x:Student = pickle.loads(xData)
         # x: Student = pickle.load(destFile)
-        print(f"Student:{x}")
+        logger.info(f"Student:{x}")
     pass
 
 x: Student = Student("Mike", "Olsen", 2019)
