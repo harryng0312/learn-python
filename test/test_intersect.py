@@ -76,7 +76,7 @@ def find_intersect_mergeandsort():
         strCB = f.readline().split(" ")
         cB = [int(num.strip()) for num in strCB if num.strip() != ""]
         pass
-    intersect: list[int] = list()
+    intersect: [int] = []
     for i in cA: cTotal.append(i)
     for i in cB: cTotal.append(i)
     cTotal.sort()
