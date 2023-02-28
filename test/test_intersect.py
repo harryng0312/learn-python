@@ -1,11 +1,10 @@
 import datetime
 import random
-import time
 from concurrent.futures import ThreadPoolExecutor
 
 from module import ROOT_DIR
 
-SIZE = 10_000
+SIZE = 20_000
 FILE_NAME = ROOT_DIR + f"/../data/test/intersect/collection_{SIZE}.txt"
 
 
@@ -77,9 +76,6 @@ def find_intersect_mergeandsort():
         strCB = f.readline().split(" ")
         cB = [int(num.strip()) for num in strCB if num.strip() != ""]
         pass
-    # finTimeIn = datetime.datetime.now()
-    # print(f"fin internal: {finTimeIn}")
-    # print(f"duration internal: {(finTimeIn - startTimeIn).total_seconds()}")
     intersect: list[int] = list()
     for i in cA: cTotal.append(i)
     for i in cB: cTotal.append(i)
@@ -107,14 +103,19 @@ def find_intersect_tradition():
         pass
     intersect = []
     cTotalVal = 0
-    for i in cA:
-        for j in cB:
-            if i == j:
-                intersect.append(i)
-                cTotalVal += i
-                time.sleep(0.001)
-                break
+    for iA, vA in enumerate(cA):
+        try:
+            index = cB.index(vA)
+            if index >= 0:
+                intersect.append(vA)
+                cTotalVal += vA
+                pass
             pass
+        except ValueError:
+            pass
+        finally:
+            pass
+        pass
     print(f"{len(intersect)} {cTotalVal}")
     pass
 
@@ -122,15 +123,16 @@ def find_intersect_tradition():
 def compare_value_in_range(val: int, arr: list[int]) -> tuple[list[int], int]:
     tmpIntersect = []
     cTotalValTmp = 0
-    for v in arr:
-        if val == v:
+    try:
+        index = arr.index(val)
+        if index >= 0:
             tmpIntersect.append(val)
-            # with lock:
-            #     res.append(val)
             cTotalValTmp += val
-            break
         pass
-    time.sleep(0.001)
+    except ValueError:
+        pass
+    finally:
+        pass
     return tmpIntersect, cTotalValTmp
 
 
@@ -147,30 +149,8 @@ def find_intersect_tradition_parallel():
     cTotalVal = 0
     ccB = (cB for _ in cA)
     # res = (intersect for _ in cA)
-    with ThreadPoolExecutor(max_workers=SIZE//10) as executor:
-        for iterTmp, tmpTotalVal in executor.map(compare_value_in_range, cA, ccB):
-            intersect.extend(iterTmp)
-            cTotalVal += tmpTotalVal
-            pass
-        pass
-    print(f"{len(intersect)} {cTotalVal}")
-    pass
-
-
-def find_intersect_tradition_parallel_queue():
-    cA: list[int] = None
-    cB: list[int] = None
-    with open(file=FILE_NAME, mode="rt") as f:
-        strCA = f.readline().split(" ")
-        cA = [int(num) for num in strCA if num.strip() != ""]
-        strCB = f.readline().split(" ")
-        cB = [int(num) for num in strCB if num.strip() != ""]
-        pass
-    intersect = []
-    cTotalVal = 0
-    ccB = (cB for _ in cA)
-    # res = (intersect for _ in cA)
-    with ThreadPoolExecutor(max_workers=SIZE//100) as executor:
+    # compare_value_in_range_jit: jit = njit(compare_value_in_range)
+    with ThreadPoolExecutor(max_workers=SIZE // 10) as executor:
         for iterTmp, tmpTotalVal in executor.map(compare_value_in_range, cA, ccB):
             intersect.extend(iterTmp)
             cTotalVal += tmpTotalVal
@@ -204,18 +184,10 @@ finTime = datetime.datetime.now()
 print(f"fin: {finTime}")
 print(f"duration: {(finTime - startTime).total_seconds()}")
 
-# print(f"======")
-# startTime = datetime.datetime.now()
-# print(f"start: {startTime}")
-# find_intersect_tradition_parallel()
-# finTime = datetime.datetime.now()
-# print(f"fin: {finTime}")
-# print(f"duration: {(finTime - startTime).total_seconds()}")
-
 print(f"======")
 startTime = datetime.datetime.now()
 print(f"start: {startTime}")
-find_intersect_tradition_parallel_queue()
+find_intersect_tradition_parallel()
 finTime = datetime.datetime.now()
 print(f"fin: {finTime}")
 print(f"duration: {(finTime - startTime).total_seconds()}")
