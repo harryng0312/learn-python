@@ -10,7 +10,9 @@ BUFFER_SIZE = 1024
 
 def hello_from_server(serverSock: sk.socket) -> None:
     data: bytes = serverSock.recv(BUFFER_SIZE)
-    logger.info(f"from client: {data.decode('utf-8')}")
+    dataStr: str = data.decode("utf-8")
+    # print(f"from client: {dataStr} len:{len(data)}")
+    logger.info(f"from client: {dataStr} len:{len(data)}")
     pass
 
 

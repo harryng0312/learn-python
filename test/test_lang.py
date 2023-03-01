@@ -1,11 +1,5 @@
-arr = [i for i in range(10)]
-arr1 = arr[:6]
+from datetime import datetime
 
-for v in arr:
-    print(f"v: {id(v)}")
-    pass
-
-
-for i in range(len(arr)):
-    print(f"arr[{i}]: {id(arr[i])}")
-    pass
+uniStr: str = f"hi server máy chủ at:{ datetime.now() }"
+uniBytes: bytes = bytes(uniStr, "utf-8")
+print(f"result:{uniBytes.decode('utf-8')} len:{len(uniBytes)}")
