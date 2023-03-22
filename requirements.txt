@@ -1,2 +1,5 @@
 numpy==1.23.5
 setuptools==65.6.3
+pyodbc~=4.0.34
+cupy~=11.4.0
+pyopencl~=2022.3.1
