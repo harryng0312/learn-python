@@ -1,3 +1,5 @@
+import os
+
 import pyodbc
 
 from module.advanced.odbc.conn_odbc import create_conn, close_conn
@@ -58,3 +60,5 @@ def select_all() -> None:
 
 select_one()
 select_all()
+
+# logger.info(f"pwd:{os.getcwd()}")
