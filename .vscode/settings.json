@@ -1,9 +1,13 @@
 {
     "terminal.integrated.env.linux": {
-        "PYTHONPATH": "${workspaceFolder}"
+        "PYTHONPATH": "${workspaceFolder}:${env:PYTHONPATH}"
     },
     "terminal.integrated.env.windows": {
-        "PYTHONPATH": "${workspaceFolder}"
+        "PYTHONPATH": "${workspaceFolder};${env:PYTHONPATH}"
     },
-    // "python.envFile": "${workspaceFolder}/.env",
+    "python.terminal.activateEnvInCurrentTerminal": false,
+    "terminal.integrated.env.osx": {
+        "PYTHONPATH": "${workspaceFolder}:${env:PYTHONPATH}"
+    },
+    "python.envFile": "${workspaceFolder}/.env",
 }

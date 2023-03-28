@@ -9,7 +9,11 @@
             "type": "python",
             "request": "launch",
             "module": "module",
-            "justMyCode": true
+            "justMyCode": true,
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "cwd": "${fileDirname}",
+            "env": {"PYTHONPATH": "${workspaceFolder}${pathSeparator}${env:PYTHONPATH}"}
         }
     ]    
 }

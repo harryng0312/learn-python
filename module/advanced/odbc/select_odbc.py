@@ -44,7 +44,7 @@ def select_all() -> None:
 
 
 select_one()
-select_all()
+# select_all()
 
-# logger.info("pwd:{0}".format(os.getenv("PYTHONPATH")))
-print("pwd:{0}".format(os.getenv("PYTHONPATH")))
+logger.info("pwd:{0}".format(os.getenv("PYTHONPATH")))
+# print("pwd:{0}".format(os.getenv("PYTHONPATH")))
