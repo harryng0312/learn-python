@@ -1,5 +1,4 @@
 import os
-
 import pyodbc
 
 from module.advanced.odbc.conn_odbc import create_conn, close_conn
@@ -7,15 +6,8 @@ from module.util.logger_conf import logger
 
 
 def select_one() -> None:
-    sql: str = """
-    SELECT customer_id
-      ,cust_name
-      ,city
-      ,grade
-      ,salesman_id
-  FROM customer
-  WHERE customer_id = ?
-    """
+    sql: str = "SELECT customer_id, cust_name, city, grade, salesman_id " \
+                + "FROM customer WHERE customer_id = ?"
     with create_conn() as conn:
         cursor: pyodbc.Cursor = conn.cursor()
         cursor.execute(sql, 1)
@@ -32,15 +24,8 @@ def select_one() -> None:
 
 
 def select_all() -> None:
-    sql: str = """
-        SELECT customer_id
-          ,cust_name
-          ,city
-          ,grade
-          ,salesman_id
-      FROM customer
-      WHERE city = ?
-        """
+    sql: str = "SELECT customer_id, cust_name, city, grade, salesman_id " \
+                + "FROM customer WHERE city = ?"
     with create_conn() as conn:
         cursor: pyodbc.Cursor = conn.cursor()
         cursor.execute(sql, "New York")
@@ -61,4 +46,5 @@ def select_all() -> None:
 select_one()
 select_all()
 
-# logger.info(f"pwd:{os.getcwd()}")
+# logger.info("pwd:{0}".format(os.getenv("PYTHONPATH")))
+print("pwd:{0}".format(os.getenv("PYTHONPATH")))
