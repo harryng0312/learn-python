@@ -131,3 +131,4 @@ dmypy.json
 .idea
 data
 bin
+.DS_Store
