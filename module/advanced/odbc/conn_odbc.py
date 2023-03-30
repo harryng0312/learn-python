@@ -10,6 +10,7 @@ DB_NAME = "test_db"
 DB_UNAME = "sa"
 DB_PASSWD = "123456"
 
+DB_DRIVER = "DRIVER={SQL Server};"
 
 @contextlib.contextmanager
 def create_conn() -> pyodbc.Connection:
@@ -17,7 +18,7 @@ def create_conn() -> pyodbc.Connection:
     # conn = pyodbc.connect("DRIVER={SQL Server};"
     #                       f"Server={DB_HOST};Port={DB_PORT};"
     #                       f"Database={DB_NAME};User ID={DB_UNAME};Password={DB_PASSWD}")
-    conn = pyodbc.connect("DRIVER={SQL Server};",
+    conn = pyodbc.connect(DB_DRIVER,
                           server=DB_HOST, port=DB_PORT,
                           database=DB_NAME, user_id=DB_UNAME, password=DB_PASSWD)
     logger.info(f"openned connection")

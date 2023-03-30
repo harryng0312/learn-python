@@ -12,7 +12,7 @@ def select_one() -> None:
         cursor: pyodbc.Cursor = conn.cursor()
         cursor.execute(sql, 1)
         # cursor.execute(sql, 3001)
-        colums: [str] = [x[0] for x in cursor.description]
+        colums: list[str] = [x[0] for x in cursor.description]
         row: pyodbc.Row = cursor.fetchone()
         if row:
             row_dict: dict = dict(zip(colums, row))
@@ -30,7 +30,7 @@ def select_all() -> None:
         cursor: pyodbc.Cursor = conn.cursor()
         cursor.execute(sql, "New York")
         # cursor: pyodbc.Cursor = conn.execute(sql, "New York")
-        colums: [str] = [x[0] for x in cursor.description]
+        colums: list[str] = [x[0] for x in cursor.description]
         rows: pyodbc.Row = cursor.fetchall()
         # row_dict: dict = dict(zip(colums, row))
         for row in rows:
