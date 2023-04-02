@@ -10,8 +10,8 @@ def select_one() -> None:
                 + "FROM customer WHERE customer_id = ?"
     with create_conn() as conn:
         cursor: pyodbc.Cursor = conn.cursor()
-        cursor.execute(sql, 1)
-        # cursor.execute(sql, 3001)
+        # cursor.execute(sql, 1)
+        cursor.execute(sql, 3001)
         colums: list[str] = [x[0] for x in cursor.description]
         row: pyodbc.Row = cursor.fetchone()
         if row:
