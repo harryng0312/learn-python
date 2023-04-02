@@ -3,8 +3,8 @@ import os
 from module.util.logger_conf import logger
 from cryptography.exceptions import InvalidKey, InvalidSignature
 from cryptography.hazmat.primitives import hashes
-from cryptography.hazmat.primitives.asymmetric import rsa, padding
-from cryptography.hazmat.primitives.asymmetric.rsa import RSAPrivateKey, RSAPublicKey
+from cryptography.hazmat.primitives.asymmetric import ec, padding
+from cryptography.hazmat.primitives.asymmetric.ec import EllipticCurvePrivateKey, EllipticCurvePublicKey
 from cryptography.hazmat.primitives.serialization import Encoding, BestAvailableEncryption, \
     KeySerializationEncryption, PrivateFormat, PublicFormat, load_pem_private_key, load_pem_public_key
 
@@ -13,8 +13,8 @@ from module.conf import *
 
 KEY_SIZE = 2048
 PRI_PASSWD = "123456"
-PRI_FILE= PROJECT_DIR + "/data/keys/rsa_pri.pem"
-PUB_FILE= PROJECT_DIR + "/data/keys/rsa_pub.pem"
+PRI_FILE= PROJECT_DIR + "/data/keys/ec_dsa_pri.pem"
+PUB_FILE= PROJECT_DIR + "/data/keys/ec_dsa_pub.pem"
 
 def genKeyPair() -> tuple[bytes, bytes]:
     priKeyBytes: bytes = None
@@ -26,8 +26,8 @@ def genKeyPair() -> tuple[bytes, bytes]:
             pass
         pass
     else:
-        priKey: RSAPrivateKey = rsa.generate_private_key(public_exponent=65537, key_size=KEY_SIZE)
-        pubKey: RSAPublicKey = priKey.public_key()
+        priKey: EllipticCurvePrivateKey = ec.generate_private_key(curve=ec.SECP256R1)
+        pubKey: EllipticCurvePublicKey = priKey.public_key()
         priKeyBytes = priKey.private_bytes(
             encoding=Encoding.PEM,
             format=PrivateFormat.PKCS8,
@@ -45,13 +45,13 @@ def genKeyPair() -> tuple[bytes, bytes]:
     return priKeyBytes, pubKeyBytes
 
 def sign(priKeyBytes: bytes, data: bytes) -> bytes:
-    priKey: RSAPrivateKey = load_pem_private_key(data=priKeyBytes, password=bytes(PRI_PASSWD, encoding="utf-8"))
-    signature: bytes = priKey.sign(data=data, padding=padding.PKCS1v15(), algorithm=hashes.SHA256())
+    priKey: EllipticCurvePrivateKey = load_pem_private_key(data=priKeyBytes, password=bytes(PRI_PASSWD, encoding="utf-8"))
+    signature: bytes = priKey.sign(data=data, signature_algorithm=ec.ECDSA(algorithm=hashes.SHA256()))
     return signature
 
 def verify(pubKeyBytes: bytes, signature: bytes, data: bytes) -> None:
-    pubKey: RSAPublicKey = load_pem_public_key(data=pubKeyBytes)
-    pubKey.verify(signature=signature, data=data, padding=padding.PKCS1v15(), algorithm=hashes.SHA256())
+    pubKey: EllipticCurvePublicKey = load_pem_public_key(data=pubKeyBytes)
+    pubKey.verify(signature=signature, data=data, signature_algorithm=ec.ECDSA(algorithm=hashes.SHA256()))
     pass
 
 
