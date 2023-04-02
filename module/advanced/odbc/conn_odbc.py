@@ -9,14 +9,14 @@ DB_PORT = 1433
 DB_NAME = "test_db"
 DB_UNAME = "sa"
 DB_PASSWD = "123456"
-DB_DRIVER = "DRIVER={SQL Server}"
+DB_DRIVER = "SQL Server"
 
 # DB_HOST = "127.0.0.1"
 # DB_PORT = 5432
 # DB_NAME = "test_db"
 # DB_UNAME = "test_db"
 # DB_PASSWD = "test_db"
-# DB_DRIVER = "DRIVER={PostgreSQL Unicode}"
+# DB_DRIVER = "PostgreSQL Unicode"
 
 @contextlib.contextmanager
 def create_conn() -> pyodbc.Connection:
@@ -26,12 +26,12 @@ def create_conn() -> pyodbc.Connection:
     #                       f"Database={DB_NAME};User ID={DB_UNAME};Password={DB_PASSWD}")
 
     # SQL Server
-    conn = pyodbc.connect(DB_DRIVER,
+    conn = pyodbc.connect(DRIVER=DB_DRIVER,
                           server=DB_HOST, port=DB_PORT,
                           database=DB_NAME, user_id=DB_UNAME, password=DB_PASSWD)
 
     # PostgreSQL
-    # conn = pyodbc.connect(DB_DRIVER,
+    # conn = pyodbc.connect(DRIVER=DB_DRIVER,
     #                       server=DB_HOST, port=DB_PORT,
     #                       database=DB_NAME, Username=DB_UNAME, password=DB_PASSWD)
     logger.info(f"openned connection")
