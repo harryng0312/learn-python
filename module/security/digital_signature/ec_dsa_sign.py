@@ -16,7 +16,7 @@ PRI_FILE = PROJECT_DIR + "/data/keys/ec_dsa_pri.pem"
 PUB_FILE = PROJECT_DIR + "/data/keys/ec_dsa_pub.pem"
 
 
-def genKeyPair() -> tuple[bytes, bytes]:
+def gen_key_pair() -> tuple[bytes, bytes]:
     priKeyBytes: bytes = None
     pubKeyBytes: bytes = None
     if os.path.isfile(PRI_FILE) and os.path.isfile(PUB_FILE):
@@ -67,7 +67,7 @@ def verify(pubKeyBytes: bytes, signature: bytes, data: bytes) -> None:
 
 
 data: bytes = b"this is data"
-priKey, pubKey = genKeyPair()
+priKey, pubKey = gen_key_pair()
 
 # logger.info(f"private key:{priKey}\npublic key:{pubKey}")
 signature: bytes = sign(priKeyBytes=priKey, data=data)

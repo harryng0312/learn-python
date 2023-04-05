@@ -16,7 +16,7 @@ PRI_FILE = PROJECT_DIR + "/data/keys/rsa_pri.pem"
 PUB_FILE = PROJECT_DIR + "/data/keys/rsa_pub.pem"
 
 
-def genKeyPair() -> tuple[bytes, bytes]:
+def gen_key_pair() -> tuple[bytes, bytes]:
     priKeyBytes: bytes = None
     pubKeyBytes: bytes = None
     if os.path.isfile(PRI_FILE) and os.path.isfile(PUB_FILE):
@@ -51,7 +51,7 @@ def sign(priKeyBytes: bytes, data: bytes) -> bytes:
     return signature
 
 
-def signPreHash(priKeyBytes: bytes, data: bytes) -> bytes:
+def sign_pre_hash(priKeyBytes: bytes, data: bytes) -> bytes:
     priKey: RSAPrivateKey = load_pem_private_key(data=priKeyBytes, password=bytes(PRI_PASSWD, encoding="utf-8"))
     hasher: hashes.Hash = hashes.Hash(algorithm=hashes.SHA256())
     hasher.update(data=data)
@@ -66,7 +66,7 @@ def verify(pubKeyBytes: bytes, signature: bytes, data: bytes) -> None:
     pass
 
 
-def verifyPreHash(pubKeyBytes: bytes, signature: bytes, data: bytes) -> None:
+def verify_pre_hash(pubKeyBytes: bytes, signature: bytes, data: bytes) -> None:
     pubKey: RSAPublicKey = load_pem_public_key(data=pubKeyBytes)
     hasher: hashes.Hash = hashes.Hash(algorithm=hashes.SHA256())
     hasher.update(data=data)
@@ -76,16 +76,16 @@ def verifyPreHash(pubKeyBytes: bytes, signature: bytes, data: bytes) -> None:
 
 
 data: bytes = b"this is data"
-priKey, pubKey = genKeyPair()
+priKey, pubKey = gen_key_pair()
 
 # logger.info(f"private key:{priKey}\npublic key:{pubKey}")
 signature: bytes = sign(priKeyBytes=priKey, data=data)
-signature2: bytes = signPreHash(priKeyBytes=priKey, data=data)
+signature2: bytes = sign_pre_hash(priKeyBytes=priKey, data=data)
 logger.info(f"signature: {base64.b64encode(s=signature).decode()} \nprehash: {base64.b64encode(s=signature2).decode()}")
 # data+=b"1"
 try:
     verify(pubKeyBytes=pubKey, signature=signature, data=data)
-    verifyPreHash(pubKeyBytes=pubKey, signature=signature, data=data)
+    verify_pre_hash(pubKeyBytes=pubKey, signature=signature, data=data)
     logger.info(f"verify: true")
     pass
 except (InvalidSignature) as ex:
