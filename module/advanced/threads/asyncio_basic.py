@@ -1,5 +1,6 @@
 import asyncio
 import asyncio.events as evt
+import contextlib as ctx
 
 async def eternity():
     # Sleep for one hour
@@ -16,4 +17,11 @@ async def main():
 # asyncio.run(main())
 # loop: evt.AbstractEventLoop = asyncio.new_event_loop()
 loop: evt.AbstractEventLoop = asyncio.get_event_loop()
-loop.run_until_complete(main())
+try:
+    loop.run_until_complete(main())
+    pass
+finally:
+    # optional
+    loop.run_until_complete(loop.shutdown_asyncgens())
+    loop.run_until_complete(loop.shutdown_default_executor())
+    pass
