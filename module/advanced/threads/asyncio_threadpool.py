@@ -37,7 +37,6 @@ def multi_thread() -> None:
     global TOTAL
     with ThreadPoolExecutor(max_workers=4) as pool:
     # with ProcessPoolExecutor(max_workers=4) as pool:
-        # with ProcessPoolExecutor(max_workers=3) as pool:
         for _ in pool.map(async_thread_function_1, [1, 1, 1, 1], timeout=1.6): pass
         pass
     logger.info(f"resource:{TOTAL}")
