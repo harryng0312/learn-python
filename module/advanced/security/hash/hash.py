@@ -33,6 +33,8 @@ def calculate_sha256_file_chunks(filename: str):
     pass
 
 
-logger.info(f"===")
-calculate_sha256(FILENAME)
-calculate_sha256_file_chunks(FILENAME)
+if __name__ == "__main__":
+    logger.info(f"===")
+    calculate_sha256(FILENAME)
+    calculate_sha256_file_chunks(FILENAME)
+    pass

@@ -43,8 +43,10 @@ def select_all() -> None:
     pass
 
 
-select_one()
-# select_all()
+if __name__ == "__main__":
+    select_one()
+    # select_all()
 
-logger.info("pwd:{0}".format(os.getenv("PYTHONPATH")))
-# print("pwd:{0}".format(os.getenv("PYTHONPATH")))
+    logger.info("pwd:{0}".format(os.getenv("PYTHONPATH")))
+    # print("pwd:{0}".format(os.getenv("PYTHONPATH")))
+    pass

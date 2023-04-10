@@ -46,17 +46,19 @@ class PeerSide(ExchangableSide):
     pass
 
 
-server_side: ServerSide = ServerSide()
-peer_side: PeerSide = PeerSide()
+if __name__ == "__main__":
+    server_side: ServerSide = ServerSide()
+    peer_side: PeerSide = PeerSide()
 
-server_pub_key: bytes = server_side.generate_keypair()
-peer_pub_key: bytes = peer_side.generate_keypair()
+    server_pub_key: bytes = server_side.generate_keypair()
+    peer_pub_key: bytes = peer_side.generate_keypair()
 
-server_side.exchange(peer_pub_key)
-peer_side.exchange(server_pub_key)
+    server_side.exchange(peer_pub_key)
+    peer_side.exchange(server_pub_key)
 
-shared_key_at_server: bytes = server_side.shared_key
-shared_key_at_peer: bytes = peer_side.shared_key
+    shared_key_at_server: bytes = server_side.shared_key
+    shared_key_at_peer: bytes = peer_side.shared_key
 
-logger.info(f"\nshared key at server:{base64.b64encode(s=shared_key_at_server).decode()}"
-            f"\nshared key at peer:{base64.b64encode(s=shared_key_at_peer).decode()}")
+    logger.info(f"\nshared key at server:{base64.b64encode(s=shared_key_at_server).decode()}"
+                f"\nshared key at peer:{base64.b64encode(s=shared_key_at_peer).decode()}")
+    pass

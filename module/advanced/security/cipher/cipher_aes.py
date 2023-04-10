@@ -60,16 +60,18 @@ def decrypt(key: bytes, iv: bytes, add: bytes, tag: bytes, data: bytes) -> bytes
     return b"".join(result)
 
 
-plain_data: bytes = b"test try again"
-logger.info(f"plain data:{base64.b64encode(s=plain_data).decode('utf-8')}")
-key, iv, add = gen_secret_key(16, True)
-crypted_data, tag = encrypt(key=key, iv=iv, add=add, data=plain_data)
-logger.info(f"encrypted base64:{base64.b64encode(s=crypted_data).decode('utf-8')} tag:{base64.b64encode(s=tag).decode('utf-8')}")
-try:
-    replain_data: bytes = decrypt(key=key, iv=iv, add=add, tag=tag, data=crypted_data)
-    logger.info(f"decrypted base64:{base64.b64encode(s=replain_data).decode('utf-8')} \n|{str(object=replain_data, encoding='utf-8')}|")
-    pass
-except (InvalidTag, TypeError) as ex:
-    logger.error("", ex)
+if __name__ == "__main__":
+    plain_data: bytes = b"test try again"
+    logger.info(f"plain data:{base64.b64encode(s=plain_data).decode('utf-8')}")
+    key, iv, add = gen_secret_key(16, True)
+    crypted_data, tag = encrypt(key=key, iv=iv, add=add, data=plain_data)
+    logger.info(f"encrypted base64:{base64.b64encode(s=crypted_data).decode('utf-8')} tag:{base64.b64encode(s=tag).decode('utf-8')}")
+    try:
+        replain_data: bytes = decrypt(key=key, iv=iv, add=add, tag=tag, data=crypted_data)
+        logger.info(f"decrypted base64:{base64.b64encode(s=replain_data).decode('utf-8')} \n|{str(object=replain_data, encoding='utf-8')}|")
+        pass
+    except (InvalidTag, TypeError) as ex:
+        logger.error("", ex)
+        pass
     pass
 

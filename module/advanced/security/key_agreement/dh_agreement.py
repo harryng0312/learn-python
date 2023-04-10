@@ -55,18 +55,20 @@ class PeerSide(ExchangableSide):
     pass
 
 
-# create peers: 1 server and 2 peers
-parameters: DHParameters = dh.generate_parameters(generator=2, key_size=2048)
-server_side: ServerSide = ServerSide()
-peer1_side: PeerSide = PeerSide()
+if __name__ == "__main__":
+    # create peers: 1 server and 2 peers
+    parameters: DHParameters = dh.generate_parameters(generator=2, key_size=2048)
+    server_side: ServerSide = ServerSide()
+    peer1_side: PeerSide = PeerSide()
 
-# generate keypairs
-server_pub_key: bytes = server_side.generate_keypair()
-peer1_pub_key: bytes = peer1_side.generate_keypair()
+    # generate keypairs
+    server_pub_key: bytes = server_side.generate_keypair()
+    peer1_pub_key: bytes = peer1_side.generate_keypair()
 
-# exchange final sharedkey
-server_side.exchange(peer1_pub_key)
-peer1_side.exchange(server_pub_key)
+    # exchange final sharedkey
+    server_side.exchange(peer1_pub_key)
+    peer1_side.exchange(server_pub_key)
 
-logger.info(f"\nshared key at server:{base64.b64encode(s=server_side.shared_key).decode()}"
-            f"\nshared key at peer1:{base64.b64encode(s=peer1_side.shared_key).decode()}")
+    logger.info(f"\nshared key at server:{base64.b64encode(s=server_side.shared_key).decode()}"
+                f"\nshared key at peer1:{base64.b64encode(s=peer1_side.shared_key).decode()}")
+    pass

@@ -68,4 +68,6 @@ def print_matrix():
     print(f"Kích thước mỗi phần tử (bytes): {rs.itemsize}")
 
 
-print_matrix()
+if __name__ == "__main__":
+    print_matrix()
+    pass

@@ -41,5 +41,7 @@ def create_socket() -> None:
     pass
 
 
-create_socket()
-time.sleep(10.0)
+if __name__ == "__main__":
+    create_socket()
+    time.sleep(10.0)
+    pass

@@ -30,6 +30,8 @@ def copy_file(srcFilePath: str, destFilePath: str):
         pass
 
 
-logger.info("copying...")
-copy_file(FILE_NAME, FILE_NAME_2)
-logger.info("copied!")
+if __name__ == "__main__":
+    logger.info("copying...")
+    copy_file(FILE_NAME, FILE_NAME_2)
+    logger.info("copied!")
+    pass

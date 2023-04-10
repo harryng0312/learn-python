@@ -84,45 +84,47 @@ def mulMatrix(mat1: np.ndarray, mat2: np.ndarray, mat1Buff: cl.Buffer, mat2Buff:
     CMD_QUEUE.finish()
 
 
-# mat1 = generate_square_maxtrix(MAT_SIZE)
-# save_matrix(filepath=FILE_MAT_NAME_1, mat=mat1)
-# savetxt_matrix(filepath=FILETXT_MAT_NAME_1, mat=mat1)
+if __name__ == "__main__":
+    # mat1 = generate_square_maxtrix(MAT_SIZE)
+    # save_matrix(filepath=FILE_MAT_NAME_1, mat=mat1)
+    # savetxt_matrix(filepath=FILETXT_MAT_NAME_1, mat=mat1)
 
-# mat2 = generate_square_maxtrix(MAT_SIZE)
-# save_matrix(filepath=FILE_MAT_NAME_2, mat=mat2)
-# savetxt_matrix(filepath=FILETXT_MAT_NAME_2, mat=mat2)
+    # mat2 = generate_square_maxtrix(MAT_SIZE)
+    # save_matrix(filepath=FILE_MAT_NAME_2, mat=mat2)
+    # savetxt_matrix(filepath=FILETXT_MAT_NAME_2, mat=mat2)
 
-startLoadTime = dt.datetime = dt.datetime.now();
-# mat1 = load_matrix(FILE_MAT_NAME_1)
-# mat2 = load_matrix(FILE_MAT_NAME_2)
-mat1 = loadtxt_matrix(FILETXT_MAT_NAME_1)
-mat2 = loadtxt_matrix(FILETXT_MAT_NAME_2)
-endLoadTime = dt.datetime = dt.datetime.now();
-print(f"Load done in {endLoadTime - startLoadTime}...")
-print(f"mat1 {type(mat1)}:\n{mat1}\nmat2 {type(mat2)}:\n{mat2}")
+    startLoadTime = dt.datetime = dt.datetime.now();
+    # mat1 = load_matrix(FILE_MAT_NAME_1)
+    # mat2 = load_matrix(FILE_MAT_NAME_2)
+    mat1 = loadtxt_matrix(FILETXT_MAT_NAME_1)
+    mat2 = loadtxt_matrix(FILETXT_MAT_NAME_2)
+    endLoadTime = dt.datetime = dt.datetime.now();
+    print(f"Load done in {endLoadTime - startLoadTime}...")
+    print(f"mat1 {type(mat1)}:\n{mat1}\nmat2 {type(mat2)}:\n{mat2}")
 
-initCl()
-mat1Arr: np.ndarray = np.array(copy=False, dtype=int, object=mat1)
-mat2Arr: np.ndarray = np.array(copy=False, dtype=int, object=mat2)
-mat3Arr: np.ndarray = np.random.rand(MAT_SIZE, MAT_SIZE).astype(dtype=int)
-# setes memory buffers
-mat1Buff = cl.Buffer(context=CONTEXT, flags=(cl.mem_flags.READ_ONLY | cl.mem_flags.COPY_HOST_PTR), hostbuf=mat1Arr)
-mat2Buff = cl.Buffer(context=CONTEXT, flags=(cl.mem_flags.READ_ONLY | cl.mem_flags.COPY_HOST_PTR), hostbuf=mat2Arr)
-# sets with of matrix
-mat1WBuff = cl.Buffer(context=CONTEXT, flags=(cl.mem_flags.READ_ONLY | cl.mem_flags.COPY_HOST_PTR),
-                      hostbuf=np.int32(mat1Arr.shape[1]))
-mat2WBuff = cl.Buffer(context=CONTEXT, flags=(cl.mem_flags.READ_ONLY | cl.mem_flags.COPY_HOST_PTR),
-                      hostbuf=np.int32(mat2Arr.shape[1]))
-# resulting buffer
-resultBuff = cl.Buffer(context=CONTEXT, flags=(cl.mem_flags.READ_WRITE), size=mat3Arr.nbytes)
+    initCl()
+    mat1Arr: np.ndarray = np.array(copy=False, dtype=int, object=mat1)
+    mat2Arr: np.ndarray = np.array(copy=False, dtype=int, object=mat2)
+    mat3Arr: np.ndarray = np.random.rand(MAT_SIZE, MAT_SIZE).astype(dtype=int)
+    # setes memory buffers
+    mat1Buff = cl.Buffer(context=CONTEXT, flags=(cl.mem_flags.READ_ONLY | cl.mem_flags.COPY_HOST_PTR), hostbuf=mat1Arr)
+    mat2Buff = cl.Buffer(context=CONTEXT, flags=(cl.mem_flags.READ_ONLY | cl.mem_flags.COPY_HOST_PTR), hostbuf=mat2Arr)
+    # sets with of matrix
+    mat1WBuff = cl.Buffer(context=CONTEXT, flags=(cl.mem_flags.READ_ONLY | cl.mem_flags.COPY_HOST_PTR),
+                        hostbuf=np.int32(mat1Arr.shape[1]))
+    mat2WBuff = cl.Buffer(context=CONTEXT, flags=(cl.mem_flags.READ_ONLY | cl.mem_flags.COPY_HOST_PTR),
+                        hostbuf=np.int32(mat2Arr.shape[1]))
+    # resulting buffer
+    resultBuff = cl.Buffer(context=CONTEXT, flags=(cl.mem_flags.READ_WRITE), size=mat3Arr.nbytes)
 
-startTime: dt.datetime = dt.datetime.now()
-mulMatrix(mat1Arr, mat2Arr, mat1Buff, mat2Buff, resultBuff, mat1WBuff, mat2WBuff)
-endTime: dt.datetime = dt.datetime.now()
+    startTime: dt.datetime = dt.datetime.now()
+    mulMatrix(mat1Arr, mat2Arr, mat1Buff, mat2Buff, resultBuff, mat1WBuff, mat2WBuff)
+    endTime: dt.datetime = dt.datetime.now()
 
-# mat3Arr = np.empty_like(mat3Arr)
-cl.enqueue_copy(queue=CMD_QUEUE, dest=mat3Arr, src=resultBuff)
-matRs = np.matrix(data=mat3Arr, copy=False)
+    # mat3Arr = np.empty_like(mat3Arr)
+    cl.enqueue_copy(queue=CMD_QUEUE, dest=mat3Arr, src=resultBuff)
+    matRs = np.matrix(data=mat3Arr, copy=False)
 
-print(f"Result by OpenCL GPU:\n{str(matRs)}")
-print(f"Run on OpenCL GPU time:{(endTime - startTime)}")
+    print(f"Result by OpenCL GPU:\n{str(matRs)}")
+    print(f"Run on OpenCL GPU time:{(endTime - startTime)}")
+    pass

@@ -56,35 +56,37 @@ def mulMatrix(mat1: np.ndarray, mat2: np.ndarray) -> np.ndarray:
     return rs
 
 
-# mat1 = generate_square_maxtrix(MAT_SIZE)
-# save_matrix(filepath=FILE_MAT_NAME_1, mat=mat1)
-# savetxt_matrix(filepath=FILETXT_MAT_NAME_1, mat=mat1)
-#
-# mat2 = generate_square_maxtrix(MAT_SIZE)
-# save_matrix(filepath=FILE_MAT_NAME_2, mat=mat2)
-# savetxt_matrix(filepath=FILETXT_MAT_NAME_2, mat=mat2)
+if __name__ == "__main__":
+    # mat1 = generate_square_maxtrix(MAT_SIZE)
+    # save_matrix(filepath=FILE_MAT_NAME_1, mat=mat1)
+    # savetxt_matrix(filepath=FILETXT_MAT_NAME_1, mat=mat1)
+    #
+    # mat2 = generate_square_maxtrix(MAT_SIZE)
+    # save_matrix(filepath=FILE_MAT_NAME_2, mat=mat2)
+    # savetxt_matrix(filepath=FILETXT_MAT_NAME_2, mat=mat2)
 
-startLoadTime = dt.datetime = dt.datetime.now();
-# mat1 = load_matrix(FILE_MAT_NAME_1)
-# mat2 = load_matrix(FILE_MAT_NAME_2)
-mat1 = loadtxt_matrix(FILETXT_MAT_NAME_1)
-mat2 = loadtxt_matrix(FILETXT_MAT_NAME_2)
-endLoadTime = dt.datetime = dt.datetime.now();
-print(f"Load done in {endLoadTime - startLoadTime}...")
-print(f"mat1 {type(mat1)}:\n{mat1}\nmat2 {type(mat2)}:\n{mat2}")
+    startLoadTime = dt.datetime = dt.datetime.now();
+    # mat1 = load_matrix(FILE_MAT_NAME_1)
+    # mat2 = load_matrix(FILE_MAT_NAME_2)
+    mat1 = loadtxt_matrix(FILETXT_MAT_NAME_1)
+    mat2 = loadtxt_matrix(FILETXT_MAT_NAME_2)
+    endLoadTime = dt.datetime = dt.datetime.now();
+    print(f"Load done in {endLoadTime - startLoadTime}...")
+    print(f"mat1 {type(mat1)}:\n{mat1}\nmat2 {type(mat2)}:\n{mat2}")
 
-mat1Arr: np.ndarray = np.array(copy=False, dtype=int, object=mat1)
-mat2Arr: np.ndarray = np.array(copy=False, dtype=int, object=mat2)
-# startTime: dt.datetime = dt.datetime.now();
-# matRs = mulMatrix(mat1Arr, mat2Arr)
-# endTime: dt.datetime = dt.datetime.now();
-# print(f"{str(matRs)}")
-# print(f"python time:{(endTime - startTime)}")
+    mat1Arr: np.ndarray = np.array(copy=False, dtype=int, object=mat1)
+    mat2Arr: np.ndarray = np.array(copy=False, dtype=int, object=mat2)
+    # startTime: dt.datetime = dt.datetime.now();
+    # matRs = mulMatrix(mat1Arr, mat2Arr)
+    # endTime: dt.datetime = dt.datetime.now();
+    # print(f"{str(matRs)}")
+    # print(f"python time:{(endTime - startTime)}")
 
-startTime: dt.datetime = dt.datetime.now();
-# matRs = mat1 * mat2
-matRs = mulMatrix(mat1Arr, mat2Arr)
-endTime: dt.datetime = dt.datetime.now();
+    startTime: dt.datetime = dt.datetime.now();
+    # matRs = mat1 * mat2
+    matRs = mulMatrix(mat1Arr, mat2Arr)
+    endTime: dt.datetime = dt.datetime.now();
 
-print(f"Result by CPU:\n{str(matRs)}")
-print(f"Run on CPU time:{(endTime - startTime)}")
+    print(f"Result by CPU:\n{str(matRs)}")
+    print(f"Run on CPU time:{(endTime - startTime)}")
+    pass

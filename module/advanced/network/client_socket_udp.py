@@ -22,4 +22,6 @@ def create_socket() -> None:
     pass
 
 
-create_socket()
+if __name__ == "__main__":
+    create_socket()
+    pass

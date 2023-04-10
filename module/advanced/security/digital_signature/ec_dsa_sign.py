@@ -66,17 +66,19 @@ def verify(pubKeyBytes: bytes, signature: bytes, data: bytes) -> None:
     pass
 
 
-data: bytes = b"this is data"
-priKey, pubKey = gen_key_pair()
+if __name__ == "__main__":
+    data: bytes = b"this is data"
+    priKey, pubKey = gen_key_pair()
 
-# logger.info(f"private key:{priKey}\npublic key:{pubKey}")
-signature: bytes = sign(priKeyBytes=priKey, data=data)
-logger.info(f"signature: {base64.b64encode(s=signature).decode()}")
-# data+=b"1"
-try:
-    verify(pubKeyBytes=pubKey, signature=signature, data=data)
-    logger.info(f"verify: true")
-    pass
-except (InvalidSignature) as ex:
-    logger.info(f"verify: false")
+    # logger.info(f"private key:{priKey}\npublic key:{pubKey}")
+    signature: bytes = sign(priKeyBytes=priKey, data=data)
+    logger.info(f"signature: {base64.b64encode(s=signature).decode()}")
+    # data+=b"1"
+    try:
+        verify(pubKeyBytes=pubKey, signature=signature, data=data)
+        logger.info(f"verify: true")
+        pass
+    except (InvalidSignature) as ex:
+        logger.info(f"verify: false")
+        pass
     pass

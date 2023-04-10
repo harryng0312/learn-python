@@ -16,6 +16,8 @@ def wrap_dec(loopcount: int):
 def say_whee(name:str):
     print(f"Whee! {name}")
 
-# say_whee = my_decorator(say_whee)
 
-say_whee("jas")
+if __name__ == "__main__":
+    # say_whee = my_decorator(say_whee)
+    say_whee("jas")
+    pass

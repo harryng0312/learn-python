@@ -25,6 +25,9 @@ def read_from_bin_file():
         logger.info(f"Student:{x}")
     pass
 
-x: Student = Student("Mike", "Olsen", 2019)
-write_to_bin_file(x)
-read_from_bin_file()
+
+if __name__ == "__main__":
+    x: Student = Student("Mike", "Olsen", 2019)
+    write_to_bin_file(x)
+    read_from_bin_file()
+    pass
