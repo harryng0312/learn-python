@@ -14,14 +14,18 @@ async def main():
     except TimeoutError:
         print('timeout!')
 
-# asyncio.run(main())
-# loop: evt.AbstractEventLoop = asyncio.new_event_loop()
-loop: evt.AbstractEventLoop = asyncio.get_event_loop()
-try:
-    loop.run_until_complete(main())
-    pass
-finally:
-    # optional
-    loop.run_until_complete(loop.shutdown_asyncgens())
-    loop.run_until_complete(loop.shutdown_default_executor())
+
+if __name__ == "__main__":
+    # asyncio.run(main())
+    # loop: evt.AbstractEventLoop = asyncio.new_event_loop()
+    loop: evt.AbstractEventLoop = asyncio.get_event_loop()
+    try:
+        loop.run_until_complete(main())
+        pass
+    finally:
+        # optional
+        loop.run_until_complete(loop.shutdown_asyncgens())
+        loop.run_until_complete(loop.shutdown_default_executor())
+        loop.close()
+        pass
     pass
