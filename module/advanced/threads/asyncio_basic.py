@@ -17,12 +17,14 @@ async def main():
 
 if __name__ == "__main__":
     # asyncio.run(main())
-    # loop: evt.AbstractEventLoop = asyncio.new_event_loop()
-    loop: evt.AbstractEventLoop = asyncio.get_event_loop()
+    loop: evt.AbstractEventLoop = asyncio.new_event_loop()
+    evt.set_event_loop(loop=loop)
+    # loop: evt.AbstractEventLoop = asyncio.get_event_loop()
     try:
         loop.run_until_complete(main())
         pass
     finally:
+        evt.set_event_loop(None)
         # optional
         loop.run_until_complete(loop.shutdown_asyncgens())
         loop.run_until_complete(loop.shutdown_default_executor())
