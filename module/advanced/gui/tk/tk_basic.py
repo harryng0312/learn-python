@@ -10,7 +10,7 @@ async def create_frame(master: Misc) -> None:
     return
 
 async def create_windows() -> None:
-    root = Tk()
+    root: Misc = Tk()
     await create_frame(master=root)
     root.mainloop()
     return
