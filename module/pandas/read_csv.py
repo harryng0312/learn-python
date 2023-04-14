@@ -31,8 +31,14 @@ def select_data(data_frm: pd.DataFrame) -> None:
 
 def select_data_join(frm_fact: pd.DataFrame, frm_dim: pd.DataFrame) -> None:
     # frm_joined: pd.DataFrame = frm_fact.join(other=frm_dim, on=["CustomerKey"], how="inner", rsuffix="_r", lsuffix="_l")
+    logger.info(f"{dt.now()}")
     frm_joined: pd.DataFrame = pd.merge(left=frm_dim, right=frm_fact, how="inner", left_on="CustomerKey", right_on="CustomerKey")
+    # logger.info(f"{dt.now()}")
+    # frm_joined.index += 1
+    logger.info(f"{dt.now()}")
     logger.info(f"\n{frm_joined}")
+    # logger.info(f"\n{frm_joined.take(indices=[1, 3])}")
+    logger.info(f"{dt.now()}")
     return
 
 
