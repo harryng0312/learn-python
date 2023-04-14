@@ -19,6 +19,7 @@ def select_data(data_frm: pd.DataFrame) -> None:
     data_frm['ShipDateKey'] = pd.to_datetime(arg=data_frm['ShipDateKey'], format=r"%Y%m%d")
     date_comp: dt = dt.strptime("2022/06/01", r"%Y/%m/%d")
     data_frm.query("ProductKey > 600 & OrderDateKey >= @date_comp", inplace=True)
+    data_frm.sort_values(by=["ProductKey", "OrderDateKey"], ascending=[True, False], inplace=True)
     logger.info(f"\n{data_frm}")
     # filter_result: pd.DataFrame = data_frm[(data_frm['ProductKey'] > 600) & (data_frm['OrderDateKey'] > dt.strptime("2022/06/01", r"%Y/%m/%d"))]
     # filter_result.sort_values("ProductKey", ascending=True, inplace=True)
