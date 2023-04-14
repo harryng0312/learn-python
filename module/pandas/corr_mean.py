@@ -29,10 +29,10 @@ def select_data(data_frm: pd.DataFrame) -> None:
     return
 
 
-def select_data_join(frm_fact: pd.DataFrame, frm_dim: pd.DataFrame) -> None:
-    # frm_joined: pd.DataFrame = frm_fact.join(other=frm_dim, on=["CustomerKey"], how="inner", rsuffix="_r", lsuffix="_l")
-    frm_joined: pd.DataFrame = pd.merge(left=frm_dim, right=frm_fact, how="inner", left_on="CustomerKey", right_on="CustomerKey")
-    logger.info(f"\n{frm_joined}")
+def select_data_corr(frm_fact: pd.DataFrame, frm_dim: pd.DataFrame) -> None:
+    logger.info(f"\n{frm_dim}")
+    logger.info(f"corr\n{frm_dim.corr()}")
+    
     return
 
 
@@ -42,5 +42,5 @@ if __name__ == "__main__":
     frm_fact = load_csv(FACT_DATA_FILE)
     frm_dim = load_csv(DIM_DATA_FILE)
     # select_data(frm_fact)
-    select_data_join(frm_fact=frm_fact, frm_dim=frm_dim)
+    select_data_corr(frm_fact=frm_fact, frm_dim=frm_dim)
     pass
