@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
 from module.util.logger_conf import logger
 from module.conf import PROJECT_DIR
 from datetime import datetime as dt
@@ -29,7 +30,7 @@ def select_data(data_frm: pd.DataFrame) -> None:
     return
 
 
-def select_data_join(frm_fact: pd.DataFrame, frm_dim: pd.DataFrame) -> None:
+def select_data_join(frm_fact: pd.DataFrame, frm_dim: pd.DataFrame) -> pd.DataFrame:
     # frm_joined: pd.DataFrame = frm_fact.join(other=frm_dim, on=["CustomerKey"], how="inner", rsuffix="_r", lsuffix="_l")
     logger.info(f"{dt.now()}")
     frm_joined: pd.DataFrame = pd.merge(left=frm_dim, right=frm_fact, how="inner", left_on="CustomerKey", right_on="CustomerKey")
@@ -39,8 +40,15 @@ def select_data_join(frm_fact: pd.DataFrame, frm_dim: pd.DataFrame) -> None:
     logger.info(f"\n{frm_joined}")
     # logger.info(f"\n{frm_joined.take(indices=[1, 3])}")
     logger.info(f"{dt.now()}")
-    return
+    
+    return frm_joined
 
+
+def plot(frm: pd.DataFrame) -> None:
+    frm = frm.iloc[[0, 100]]
+    frm.plot(kind="scatter", x="CustomerKey", y="DateFirstPurchase")
+    plt.show()
+    return
 
 if __name__ == "__main__":
     # show_dataframe()
@@ -48,5 +56,6 @@ if __name__ == "__main__":
     frm_fact = load_csv(FACT_DATA_FILE)
     frm_dim = load_csv(DIM_DATA_FILE)
     # select_data(frm_fact)
-    select_data_join(frm_fact=frm_fact, frm_dim=frm_dim)
+    frm_join = select_data_join(frm_fact=frm_fact, frm_dim=frm_dim)
+    plot(frm=frm_join)
     pass
