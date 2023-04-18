@@ -48,10 +48,11 @@ def plot(frm: pd.DataFrame) -> None:
     frm = frm.iloc[:100]
     logger.info(f"\n{frm}")
     frm_sum = frm.groupby(by=["CustomerKey"])["SalesOrderNumber"] \
-        .count().to_frame() \
+        .count().to_frame().reset_index() \
         .rename(columns={"SalesOrderNumber":"sumOfSalesOrder"})
+    frm_sum.sort_values(by=["CustomerKey"], ascending=[True], inplace=True)
     logger.info(f"\n{frm_sum}")
-    frm_sum.plot.bar()
+    frm_sum.plot.bar(x="CustomerKey", y="sumOfSalesOrder")
     # frm_sum.plot(kind="bar")
     # plt.bar(x=frm_sum["CustomerKey"], data=frm_sum["sumOfSalesOrder"])
     plt.show()    
