@@ -53,8 +53,8 @@ def plot(frm: pd.DataFrame) -> None:
     logger.info(f"\n{frm_sum}")
     frm_sum.plot.bar()
     # frm_sum.plot(kind="bar")
-    plt.show()
-    
+    # plt.bar(x=frm_sum["CustomerKey"], data=frm_sum["sumOfSalesOrder"])
+    plt.show()    
     return
 
 if __name__ == "__main__":
