@@ -47,7 +47,9 @@ def select_data_join(frm_fact: pd.DataFrame, frm_dim: pd.DataFrame) -> pd.DataFr
 def plot(frm: pd.DataFrame) -> None:
     frm = frm.iloc[:100]
     logger.info(f"\n{frm}")
-    frm_sum = frm.groupby(by=["CustomerKey"])["SalesOrderNumber"].count()
+    frm_sum = frm.groupby(by=["CustomerKey"])["SalesOrderNumber"] \
+        .count().to_frame() \
+        .rename(columns={"SalesOrderNumber":"sumOfSalesOrder"})
     logger.info(f"\n{frm_sum}")
     frm_sum.plot.bar()
     # frm_sum.plot(kind="bar")
