@@ -15,11 +15,12 @@ def find_derivate() -> None:
     return
 
 def find_integrate() -> None:
-    x = sp.symbols('x') 
+    x = sp.symbols('x')
     expr = x**2 + x + 1 
     integrate = sp.integrate(expr, x)
     # sp.init_session()
-    # logger.info(f"integrate:{integrate}")
+    logger.info(f"integrate:{integrate}")
+    logger.info(f"integrate eval:{integrate.subs({x:3})}")
     # sp.pprint(expr=expr)
     return
 
