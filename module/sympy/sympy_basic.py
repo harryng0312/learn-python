@@ -1,4 +1,5 @@
 import sympy as sp
+import sympy.plotting as spplot
 
 from module.util.logger_conf import logger
 
@@ -21,7 +22,8 @@ def find_integrate() -> None:
     # sp.init_session()
     logger.info(f"integrate:{integrate}")
     logger.info(f"integrate eval:{integrate.subs({x:3})}")
-    # sp.pprint(expr=expr)
+    sp.plot(integrate)
+    # spplot.plot3d(integrate)
     return
 
 if __name__ == "__main__":
