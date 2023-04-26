@@ -1,5 +1,8 @@
 import sympy as sp
 import sympy.plotting as spplot
+import matplotlib.figure as fig
+import matplotlib.pyplot as plt
+import numpy as np
 
 from module.util.logger_conf import logger
 
@@ -26,7 +29,26 @@ def find_integrate() -> None:
     # spplot.plot3d(integrate)
     return
 
+def plot_trigonometric_func() -> None:
+    x = sp.symbols("x")
+    sin_func = sp.sin(x)
+    cos_func = sp.cos(x+sp.pi)
+    tan_func = sp.tan(x)
+    graph_sin_cos: sp.plotting.plot.Plot = sp.plot(sin_func, cos_func, show=False)
+    graph_tan: sp.plotting.plot.Plot = sp.plot(tan_func, show=False, ylim=(-10, 10))
+    graph_tan.show()
+    # fig, axs = plt.subplots(nrows=1, ncols=1)
+    # fig.subplots_adjust(left=0.25, bottom=0.25)
+    # t = np.arange(start=-10, stop=10, step = 0.001)
+    # ax1 = fig.add_subplot(1, 1, 1)
+    # ax2 = fig.add_subplot(2, 1, 2)
+    # ax1.plot(t)
+    # plt.show()
+
+    return
+
 if __name__ == "__main__":
     # sp.init_printing()
-    find_integrate()
+    # find_integrate()
+    plot_trigonometric_func()
     pass
