@@ -3,7 +3,7 @@ import pyopencl as cl
 import datetime as dt
 import io
 
-KERNEL_PATH = r"src/main/basic/learn_math/kernels/opencl/matrixmultiplication.cl"
+KERNEL_PATH = r"D:/training/python/learn-python/module/learn_math/kernels/opencl/matrixmultiplication.cl"
 FILE_MAT_NAME_1 = "data/matrix/mat1"
 FILE_MAT_NAME_2 = "data/matrix/mat2"
 FILETXT_MAT_NAME_1 = "data/matrix/mat1.txt"
@@ -79,8 +79,7 @@ def initCl() -> None:
 def mulMatrix(mat1: np.ndarray, mat2: np.ndarray, mat1Buff: cl.Buffer, mat2Buff: cl.Buffer,
               resultBuff: cl.Buffer, mat1WBuff: cl.Buffer, mat2WBuff: cl.Buffer) -> None:
     # rs: np.ndarray = mat1 * mat2
-    PROGRAM.matrixMulInt(CMD_QUEUE, (mat1.shape[0], mat2.shape[1]), LOCAL_WORKGROUP, mat1Buff, mat2Buff, resultBuff,
-                         mat1WBuff, mat2WBuff)
+    PROGRAM.matrixMulInt(CMD_QUEUE, (mat1.shape[0], mat2.shape[1]), LOCAL_WORKGROUP, mat1Buff, mat2Buff, resultBuff, mat1WBuff, mat2WBuff)
     CMD_QUEUE.finish()
 
 
