@@ -34,9 +34,12 @@ def plot_trigonometric_func() -> None:
     sin_func = sp.sin(x)
     cos_func = sp.cos(x+sp.pi)
     tan_func = sp.tan(x)
+    x_1_func = 2/x
     graph_sin_cos: sp.plotting.plot.Plot = sp.plot(sin_func, cos_func, show=False)
     graph_tan: sp.plotting.plot.Plot = sp.plot(tan_func, show=False, ylim=(-10, 10))
-    graph_tan.show()
+    graph_1_x: sp.plotting.plot.Plot = sp.plot(x_1_func, show=False, ylim=(-10, 10))
+    # graph_tan.show()
+    graph_1_x.show()
     # fig, axs = plt.subplots(nrows=1, ncols=1)
     # fig.subplots_adjust(left=0.25, bottom=0.25)
     # t = np.arange(start=-10, stop=10, step = 0.001)
