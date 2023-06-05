@@ -8,7 +8,7 @@ FILE_MAT_NAME_1 = "data/matrix/mat1"
 FILE_MAT_NAME_2 = "data/matrix/mat2"
 FILETXT_MAT_NAME_1 = "data/matrix/mat1.txt"
 FILETXT_MAT_NAME_2 = "data/matrix/mat2.txt"
-MAT_SIZE = 4_096
+MAT_SIZE = 6_144
 
 def generate_square_maxtrix(n: int) -> np.matrix:
     m1 = np.random.randint(low=-128, high=127, size=(n, n))
@@ -82,10 +82,10 @@ def computeByGPU(deviceIndex:int = 0) -> None:
     startTime: dt.datetime = dt.datetime.now()
     # matRs = mat1 * mat2
     N = 100
-    CN = 10
+    CN = 1
     mempool = cp.get_default_memory_pool()
     pinned_mempool = cp.get_default_pinned_memory_pool()
-    mempool.set_limit(size = 1 * 1024**3)
+    # mempool.set_limit(size = 2 * 1024**3)
     for i in range(N):
         if i > 0 and i % CN == 0:
             print(f"Round {i}: {mempool.used_bytes()} + {mempool.free_bytes()} = {mempool.total_bytes()} | {pinned_mempool.n_free_blocks()} | {pinned_mempool.n_free_blocks()}")
