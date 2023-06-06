@@ -24,5 +24,5 @@ class D(B,C):
         super(D, self).__init__()
         print("<- D")
 
-
-D()
+if __name__ == "__main__":
+    D()
