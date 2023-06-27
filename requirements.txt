@@ -6,3 +6,4 @@ pyopencl~=2022.3.1
 cryptography~=39.0.0
 pandas~=1.5.0
 matplotlib~=37.0.0
+scikit-learn~=1.2
