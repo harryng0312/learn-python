@@ -1,6 +1,7 @@
 from concurrent.futures import ProcessPoolExecutor, Executor, ThreadPoolExecutor, wait, Future
 from multiprocessing import get_context, Queue, Manager
 from multiprocessing.context import BaseContext
+import scipy
 
 import numpy as np
 
@@ -47,13 +48,18 @@ def mul_matrix_parallel(mat1: np.ndarray, mat2: np.ndarray, threadCount: int = 4
 def print_matrix():
     m1 = np.matrix([
         [2, 3, 4],
-        [1, 0, 0]
-    ])
+        [1, 0, 0],
+    ], copy=False, dtype=np.float64)
     m2 = np.matrix([
         [0, 1000],
         [1, 100],
         [0, 10]
-    ])
+    ], copy=False, dtype=np.float64)
+    print(f"Ma trận chuyển vị:\n{m1.T}")
+    # print(f"Ma trận giả nghịch đảo:\n{m1.I}\n{scipy.linalg.pinv(m1.I).astype(int)}")
+    print(f"Ma trận giả nghịch đảo:\n{m1.I} \nnghịch đảo lại:\n{np.linalg.pinv(m1.I).astype(dtype=np.float64, copy=False)}")
+    print(f"Ma trận chuyển vị:\n{m1.T} \nliên hợp:\n{m1.H}")
+    print(f"Tích Ma trận giả nghịch đảo:\n{m1 * np.matrix(m1.I)}")
     # rs = m1 * m2
     rs = mul_matrix_parallel(mat1=np.array(copy=False, dtype=int, object=m1),
                    mat2=np.array(copy=False, dtype=int, object=m2))
