@@ -8,4 +8,5 @@ pandas~=1.5.0
 matplotlib~=37.0.0
 scikit-learn~=1.2
 pycairo~=1.23
-wxpython=4.2
+wxpython~=4.2
+pillow~=9.4
