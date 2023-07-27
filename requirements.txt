@@ -10,3 +10,4 @@ scikit-learn~=1.2
 pycairo~=1.23
 wxpython~=4.2
 pillow~=9.4
+tensorflow~=2.12
