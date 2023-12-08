@@ -15,7 +15,7 @@ class PasswordFormController(object):
     
     def init_view(self) -> None:
         self.view.init_view(self.model)
-        print(f"model in controller:{id(self.model)}")
+        # print(f"model in controller:{id(self.model)}")
         self.model.priv_key_b, self.model.pub_key_b = cu.generate_keypair()
         self.model.client_pubkey.set(binascii.hexlify(self.model.pub_key_b).decode())
         return

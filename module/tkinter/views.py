@@ -36,12 +36,14 @@ class PasswordFormView(ttk.Frame):
         lb_plain_passwd = ttk.Label(master=self, style="tf.TLabel", text="Plained Password:")
         lb_encrypted_passwd = ttk.Label(master=self, style="tf.TLabel", text="Encrypted Password:")
         
-        txt_client_pub_key_val = ttk.Entry(master=self, style="tf.TEntry", textvariable=model.client_pubkey, state="readonly")
+        txt_client_pub_key_val = ttk.Entry(master=self, style="tf.TLabel", textvariable=model.client_pubkey, \
+                                           takefocus=False, state="readonly")
         txt_session_id = ttk.Entry(master=self, style="tf.TEntry", textvariable=model.session_id)
         txt_random_no = ttk.Entry(master=self, style="tf.TEntry", textvariable=model.random_no)
         txt_server_pub_key = ttk.Entry(master=self, style="tf.TEntry", textvariable=model.server_pubkey)
-        txt_plain_passwd = ttk.Entry(master=self, style="tf.TEntry", textvariable=model.plain_passwd)
-        txt_encrypted_passwd_val = ttk.Entry(master=self, style="tf.TLabel", textvariable=model.enc_passwd, state="readonly")
+        txt_plain_passwd = ttk.Entry(master=self, style="tf.TEntry", textvariable=model.plain_passwd, show="\u2022")
+        txt_encrypted_passwd_val = ttk.Entry(master=self, style="tf.TLabel", textvariable=model.enc_passwd, \
+                                            takefocus=False, state="readonly")
         
         btn_enc = ttk.Button(master=self, text="Encrypt")
 
@@ -73,7 +75,7 @@ class PasswordFormView(ttk.Frame):
         btn_enc.bind('<Return>', self.btn_enc_return)
         btn_enc.bind('<Button-1>', self.btn_enc_return)
         # add
-        print(f"model in view:{id(model)}")
+        # print(f"model in view:{id(model)}")
         return
     
     def init_view(self, model:PasswordFormModel) -> None:

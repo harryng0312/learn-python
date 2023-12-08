@@ -18,7 +18,7 @@ class App(tk.Tk):
         self.update_idletasks()
         # self.config(width=600, height=300)
         # set wd position at center of screen
-        print(f"winfo height:{self.winfo_height()}")
+        # print(f"winfo height:{self.winfo_height()}")
         center_x = (self.winfo_screenwidth() - self.winfo_width())//2
         center_y = (self.winfo_screenheight() - self.winfo_height())//2
         self.geometry(f"{width}x{height}+{center_x}+{center_y}")
