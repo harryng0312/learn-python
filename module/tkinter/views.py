@@ -36,12 +36,12 @@ class PasswordFormView(ttk.Frame):
         lb_plain_passwd = ttk.Label(master=self, style="tf.TLabel", text="Plained Password:")
         lb_encrypted_passwd = ttk.Label(master=self, style="tf.TLabel", text="Encrypted Password:")
         
-        lb_client_pub_key_val = ttk.Label(master=self, style="tf.TLabel", textvariable=model.client_pubkey)
+        txt_client_pub_key_val = ttk.Entry(master=self, style="tf.TEntry", textvariable=model.client_pubkey, state="readonly")
         txt_session_id = ttk.Entry(master=self, style="tf.TEntry", textvariable=model.session_id)
         txt_random_no = ttk.Entry(master=self, style="tf.TEntry", textvariable=model.random_no)
         txt_server_pub_key = ttk.Entry(master=self, style="tf.TEntry", textvariable=model.server_pubkey)
         txt_plain_passwd = ttk.Entry(master=self, style="tf.TEntry", textvariable=model.plain_passwd)
-        lb_encrypted_passwd_val = ttk.Label(master=self, style="tf.TLabel", textvariable=model.enc_passwd)
+        txt_encrypted_passwd_val = ttk.Entry(master=self, style="tf.TLabel", textvariable=model.enc_passwd, state="readonly")
         
         btn_enc = ttk.Button(master=self, text="Encrypt")
 
@@ -53,12 +53,12 @@ class PasswordFormView(ttk.Frame):
         lb_plain_passwd.grid(row=4, column=0, padx=(0, 5), pady=(0, 5), sticky="e")
         lb_encrypted_passwd.grid(row=5, column=0, padx=(0, 5), pady=(0, 5), sticky="e")
 
-        lb_client_pub_key_val.grid(row=0, column=1, padx=(0, 5), pady=(0, 5), sticky="ew")
+        txt_client_pub_key_val.grid(row=0, column=1, padx=(0, 5), pady=(0, 5), sticky="ew")
         txt_session_id.grid(row=1, column=1, padx=(0, 5), pady=(0, 5), sticky="ew")
         txt_random_no.grid(row=2, column=1, padx=(0, 5), pady=(0, 5), sticky="ew")
         txt_server_pub_key.grid(row=3, column=1, padx=(0, 5), pady=(0, 5), sticky="ew")
         txt_plain_passwd.grid(row=4, column=1, padx=(0, 5), pady=(0, 5), sticky="ew")
-        lb_encrypted_passwd_val.grid(row=5, column=1, padx=(0, 5), pady=(0, 5), sticky="ew")
+        txt_encrypted_passwd_val.grid(row=5, column=1, padx=(0, 5), pady=(0, 5), sticky="ew")
 
         btn_enc.grid(row=6, column=1, columnspan=2, padx=(0, 5), pady=(0, 5), sticky="w")
         # lb_client_pub_key.grid(row=0, column=0, sticky="e")

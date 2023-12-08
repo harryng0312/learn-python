@@ -1,7 +1,6 @@
 from __future__ import annotations
 import tkinter as tk
 
-
 class PasswordFormModel(object):
     def __init__(self, master: tk.Tk) -> None:
         self.client_pubkey = tk.StringVar(master=master, value="")
@@ -64,6 +63,24 @@ class PasswordFormModel(object):
     @enc_passwd.setter
     def enc_passwd(self, val: tk.StringVar):
         self.__enc_passwd = val
+        return
+    
+    @property
+    def priv_key_b(self) -> bytes:
+        return self.__priv_key_b
+
+    @priv_key_b.setter
+    def priv_key_b(self, val: bytes):
+        self.__priv_key_b = val
+        return
+
+    @property
+    def pub_key_b(self) -> bytes:
+        return self.__pub_key_b
+
+    @pub_key_b.setter
+    def pub_key_b(self, val: bytes):
+        self.__pub_key_b = val
         return
 
     # end class
