@@ -133,3 +133,5 @@ data
 bin
 .DS_Store
 models
+data.zip
+**/data
